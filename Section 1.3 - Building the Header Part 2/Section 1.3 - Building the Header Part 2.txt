@@ -1,4 +1,4 @@
-Section 1.2 Building the Header Part 1:
+Section 1.3 Building the Header Part 2:
 
 --------------------------------------
 Learning Outcome

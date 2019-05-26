@@ -1,0 +1,112 @@
+/*
+COLORS:
+Light green: #7ed56f
+Medium green: #55c57a
+Dark green: #28b485
+*/
+
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+body {
+   font-family: "Lato", sans-serif;
+   font-weight: 400;
+   font-size: 16px;
+   line-height: 1.7;
+   color: #777;
+   padding: 30px;    /* Padding around the whole web page*/
+}
+
+.header {
+   height: 95vh;     /* Vertical height of this element box should be 95% of the viewport height */
+   background-image: linear-gradient(
+      to right bottom, 
+      rgba(126, 213, 111, 0.8),
+      rgb(40, 180, 133, 0.8)), 
+   url(../img/hero.jpg);
+   background-size: cover;
+   background-position: top;     /* Ensure the image stays at the top regardless of viewport */
+   position: relative;     /* Sets the Parent element origin position as a reference point */
+
+   clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%)
+}
+
+.logo-box {
+   position: absolute;
+   top: 40px;              /* Starts to count from parent element origin i.e. .header position */
+   left: 40px;             /* Starts to count from parent element origin i.e. .header position */
+}
+
+.logo {
+   height: 35px;           /* size of the image. Browser can figure out the width if none specified */
+}
+
+.text-box {
+   position: absolute;
+   top: 40%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   /* background: red; */    /* Demonstration box for center an object */
+}
+
+.heading-primary {
+   color: #ffffff;
+   text-transform: uppercase;
+
+   backface-visibility: hidden;     /* Fix for the shaking - no one knows why animation shakes */
+}
+
+.heading-primary-main {
+   display: block;         /* The span element is inline by default. Block makes it sit on own line */
+   font-size: 60px;
+   font-weight: 400;
+   letter-spacing: 35px;   /* Adds spacing to each letter */
+
+   animation-name: moveInLeft;
+   animation-duration: 1s;
+   animation-timing-function: ease-out;
+   /* 
+   animation-delay: 3s;
+   animation-iteration-count: 3; 
+   */
+}
+
+.heading-primary-sub {
+   display: block;         /* The span element is inline by default. Block makes it sit on own line */
+   font-size: 20px;
+   font-weight: 700;
+   letter-spacing: 17.4px;
+
+   animation: moveInRight 1s ease-out;
+}
+
+@keyframes moveInLeft {
+   0% {
+      opacity: 0;
+      transform: translateX(-100px)    /* negative moves left on the x axis */
+   }
+   80% {
+      transform: translateX(10px)      /* positive moves right on the x axis */
+   }
+   100%{
+      opacity: 1;
+      transform: translateX(0)         /* Translate at 0 to look exactly like it does right now */
+   }
+}
+
+@keyframes moveInRight {
+   0% {
+      opacity: 0;
+      transform: translateX(100px)    /* negative moves left on the x axis */
+   }
+   80% {
+      transform: translateX(-10px)      /* positive moves right on the x axis */
+   }
+   100%{
+      opacity: 1;
+      transform: translateX(0)         /* Translate at 0 to look exactly like it does right now */
+   }
+}
