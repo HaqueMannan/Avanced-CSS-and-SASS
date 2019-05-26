@@ -1,0 +1,61 @@
+Section 1.5 Building a Complex Animated Button:
+
+--------------------------------------
+Learning Outcome
+--------------------------------------
+> What pseudo-elements and pseudo-classes are
+> How to create a hover animation effect using the transition property
+> How and why to use the ::after pseudo element
+
+
+--------------------------------------
+Pseudo-Elements & Pseudo-Classes
+--------------------------------------
+- a pseudo class is followed by a colon for example :link, :hover, etc. is a sudo class.
+- Pseudo class is a special state of a selector. For example .btn:link -> the :link is the state of the btn selector.
+- The :visitor state is when a user has already seen the event and uses it again. You will notice the default behaviour/style of <a> element is a blue link when first visited and when clicked then the link turns purple.
+
+
+--------------------------------------
+Hover Animation Effect
+--------------------------------------
+- Using the :hover and :after pseudo classes we can animate when we hover on an element.
+- We can use the transform property to transform the element.
+- This will animate the element without the @keyframes animation.
+   .btn:link,
+   .btn:visited {
+      transition: all .2s;
+   }
+   .btn:hover {
+      transform: translateY(-3px);
+   }
+   .btn:active {
+      transform: translateY(-1px);
+   }
+- This is the easier method of the two animation methods.
+- The transform on the :hover and the :active will be animated in relation to the initial state.
+- We need to use the transition property on the element we want the initial state of the animation.
+- We can use the shorthand for the transition property.
+
+
+--------------------------------------
+The ::after Pseudo-Element
+--------------------------------------
+- The ::after pseudo-element acts as a virtual element right after the element that we are selecting. We can then style that virtual element.
+- The ::after pseudo-element is very powerful to allow us to do some powerful effects.
+- This works really well with the :hover pseudo-class.
+- The trick is to create the pseudo-element exactly like the parent element but place it behind it. When we hover over the element we will show the pseudo-element and when we hover out of the element, this hidden pseudo-element will basically go behind the original element.
+
+- We must always specify the content property, even if empty, as well as the display property - else it will not appear.
+   .btn::after {
+      content: "";
+      display: inline-block;
+   }
+
+- The pseudo-element acts as a child of the parent element and therefore if we say height of 100% this will act as the height in relation to the parent element.
+- We use absolute positioning to place the pseudo-element behind the actual element.
+- We use the z-index property to position elements behind each other.
+- The :hover::after state will apply the ::after pseudo-element property when we hover over the element selector. We can use the transform property to animate.
+   .btn:hover::after {
+      transform: scale(2);
+   }
