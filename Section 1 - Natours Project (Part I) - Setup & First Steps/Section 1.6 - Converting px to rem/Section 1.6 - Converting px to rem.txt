@@ -1,0 +1,50 @@
+Section 1.6 Converting px to rem:
+
+--------------------------------------
+Learning Outcome
+--------------------------------------
+> How and why to use rem units in our project
+> A great workflow for converting px to rem
+
+
+--------------------------------------
+Rem Units
+--------------------------------------
+- A easy way to change all the measurements on our page with one simple setting.
+- e.g. when we hit a breakpoint to display our page on a mobile device, we want to decrease the measurements on our web page all at the same time.
+- Can change one global setting e.g. global font size.
+
+
+--------------------------------------
+Converting px to rem
+--------------------------------------
+- The rem unit is always in relation to the root font size.
+- If we change the root html font-size to 10px - this is to make our life easier because we know that 1 rem = 10px.
+- We can now replace all our font-size from pixels into rem units by dividing it by 10 (if 1 rem = 16px then we would have to do a lot of conversion calculations and hence 10 is more easily divisible than using 16).
+- This is a very common technique:
+   html {
+      font-size: 10px;
+   }
+
+   body {
+      padding: 3rem;
+   }
+
+   logo {
+      height: 3.5rem;
+   }
+
+- If 1rem = 10px then 30/10 = 3rem and 35/10 = 3.5rem, as seen in the above example.
+- We can now convert all our pixels units into rems and the measurements will be relative to the root font-size (this can be rem for any property such as the height, padding, border-radius, etc.)
+- In the browser if we were to change the html root font-size smaller or larger, this will make our web page sizing adapt to the change and will apply to all rem elements.
+- Modern CSS design development it is good practice to use relative units like rem units.
+
+- Now this is bad practice to set the root font-size to 10px, this is because there may be users who reduce vision and sometimes would increase the font-size of the default browser 16px. However, the above will remove the ability for these users to see our web page properly as they can no longer change the font size because our root font size will override to 10px no matter what the user has as a default font size.
+- We will convert this into a percentage which will translate the percentage of the font size given by the browsers. The absolute default, if the user does not change anything, is 16px.
+   html {
+      font-size: 62.5%;
+   }
+
+- 100% = 16px but if we do 10/16 = 0.625 x 100 = 62.5% then 62.5% = 10px which is what we want.
+- So if the user uses the default 16px then this will translate to .625 x 16 = 10px root font size. If the user decides to increase the font to 20px then this will translate to .625 x 20 = 12.5px root font size and so on, so forth. This conversion will truly make our web-page dynamic and responsive to the users input updating the calculations using the rem conversion.
+- The rem Unit is not supported below IE9 browsers. IE9 is really old and Microsoft has moved onto their Edge browser.

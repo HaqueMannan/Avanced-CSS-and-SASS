@@ -1,0 +1,35 @@
+Section 1.3 Building the Header Part 2:
+
+--------------------------------------
+Learning Outcome
+--------------------------------------
+> The easiest way to center anything with the transform, top and left properties
+
+
+--------------------------------------
+Center Elements
+--------------------------------------
+- It is always good practice to add elements into a container and then position the container on the page. We generally would use a <div> element as the container and we would provide a class or id to the container to target it within the CSS.
+- Use position: absolute property on the element.
+- We an then position the element using the top, right, left, bottom, etc. to put the element exactly where we want it on our web page.
+
+   .logo-box {
+      position: absolute;
+      top: 40px;
+      left: 40px;
+   }
+
+- The measurements starts from a point of reference before it starts to count i.e. the 40px to the left and 40px from the top.
+- That reference is a parent element which has its position set to relative.
+
+- To center an element regardless of the size of the viewport (height or width) i.e. to always stay in the middle of the web page.
+- Again we would use absolute position and shift top and left by 50%, but we would also need to transform: translate the box element. 
+- We need to specify how much we want to translate on the x and y axis. We want to translate by -50% on both the x and y.
+- This will shift the box half of the width to the left side and half of the height to the top. The element will therefore sit center of the web page and will be dynamic regardless of the viewport size.
+   {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+   }
+
+- The top and left properties relates to the position from the parent element while the translate property is in relation to the element itself.
