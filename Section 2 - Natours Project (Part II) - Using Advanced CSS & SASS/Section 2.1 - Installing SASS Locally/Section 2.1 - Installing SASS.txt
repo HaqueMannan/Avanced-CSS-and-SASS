@@ -1,0 +1,19 @@
+Section 2.1 Installing SASS:
+
+--------------------------------------
+Learning Outcome
+--------------------------------------
+> How to install SASS locally to a project directory
+
+
+--------------------------------------
+SASS Installation
+--------------------------------------
+- Node and NPM must be installed on our local machines before we can install the node-sass package.
+- Navigate to your project within the terminal (alternatively we could use VS Code integrated terminal).
+- To create a package.json file we can run the following command in the terminal and go through the questions to create a npm package.json file in our project directory:
+   npm init
+- Once we have our package.json file we can then run the next command to install node-sass locally to our project directory (we do not want to install it globally).
+   npm install node-sass --save-dev
+- using the --save-dev flag will add this as a developer dependency whereas using the --save will add this as a dependency. Once the package has been installed we should notice that our package.json file has been updated and we should also have a new node_modules folder containing all the modules/packages required for the node-sass package to run on our machine locally.
+- The package.json file is useful to share our code with other developers. This allows other developers to download all the project dependencies from the package.json file and therefore we do not need to share the node_modules folder as this would probably contain thousands of files. We would therefore only need to share our other files and the package.json file with other developers and not the node_modules folder.
