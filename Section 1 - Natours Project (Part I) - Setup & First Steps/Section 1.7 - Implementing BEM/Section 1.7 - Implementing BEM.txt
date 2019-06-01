@@ -1,0 +1,28 @@
+Section 1.7 Implementing BEM:
+
+--------------------------------------
+Learning Outcome
+--------------------------------------
+> How to use the BEM method in practice
+
+
+--------------------------------------
+BEM
+--------------------------------------
+- Block, Element, Modifier
+   .block {}
+   .block__element {}
+   .block__element--modifier {}
+
+- BLOCK: standalone component that is meaningful on its own.
+- ELEMENT: part of a block that has no standalone meaning.
+- MODIFIER: a different version of a block or an element.
+
+Examples:
+Block:
+   <figure class="recipe"></figure>
+Element:
+   <div class="recipe__hero"></div>
+Modifier:
+   <div class="recipe__statValue--1"></div>
+   <a class="recipe__btn btn btn--round" href="#">Try</a>
