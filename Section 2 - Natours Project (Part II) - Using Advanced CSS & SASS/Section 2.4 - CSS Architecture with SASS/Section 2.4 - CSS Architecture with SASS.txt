@@ -1,0 +1,61 @@
+Section 2.4 CSS Architecture with SASS:
+
+--------------------------------------
+Learning Outcome
+--------------------------------------
+> How to implement the 7-1 Pattern CSS Architecture
+
+--------------------------------------
+The 7-1 Pattern CSS Architecture
+--------------------------------------
+- In our project directory we would need to create 7 sub-folders within the sass folder. Each folder will have a sass/scss file named after the folder.
+- The sass/scss files within the sub-folders should be a partial so that we can later import it into the main sass/scss file.
+- Partials always start with an underscore (_) in the file name.
+- The main sass/scss file will import all of the sub-folder partial files. To import a partial into our main.scss file we would add the code @import followed by the path of the partial file. We do not need to write the underscore or the file extension when importing. For example:
+   @import "base/base";
+
+
+The CSS folder architecture will look something like the below:
+   Project Folder
+      /sass
+         /base
+            _animations.scss
+            _base.scss
+            _typography.scss
+            _utilities.scss
+         /abstracts
+            _functions.scss
+            _mixins.scss
+            _variables.scss
+         /components
+            _button.scss
+         /layouts
+            _header.scss
+         /pages
+            _home.scss
+         /themes
+         /vendor
+         main.scss
+
+- This architecture is mainly used to handle very large multi-page websites/webapps and may be an overkill for smaller projects.
+
+
+--------------------------------------
+Folder File Definitions/Purpose
+--------------------------------------
+- The base folder will contain the really low level basic CSS for example resets and html/body styles selectors.
+- The abstract folder will contain code that are not going to output any css for example variables, mixins,functions, etc.
+- The components folder will contain one file for each of our components. Components are reusable building blocks that make up our websites/webapps and they should also be reusable anywhere on the page i.e. completely independent and held together by the layout of the page.
+- The layouts folder will contain each piece of the global layout of the webpage/webapp for example a global header, global footer, etc. These layouts elements should work everywhere on all pages.
+- The pages folder will contain specific styles that are only applicable for specific pages.
+- The Themes folder will contain themes for example if we are creating a webapp with different themes.
+- The vendors folder will contain third party css, animations or icons libraries for example Bootstrap or Materialise CSS, fontawesome, etc.
+
+Important Note: The components and layouts files are very subjective and there is no right or wrong on which files we would consider to be a component or a layout. Both are very interlinked with each other. For example the header can be considered a component or a layout and depends on the developer.
+
+
+--------------------------------------
+The main.scss
+--------------------------------------
+- The purpose of the main.scss file is to serve as an import to all of the other partial files and this main file should not contain any css style codes. Therefore, there will be no code other than the @import within this main file which will be used to compile all of the sass/scss code into css code.
+- This will allow our css architecture to be very modular and easier to maintain ad update.
