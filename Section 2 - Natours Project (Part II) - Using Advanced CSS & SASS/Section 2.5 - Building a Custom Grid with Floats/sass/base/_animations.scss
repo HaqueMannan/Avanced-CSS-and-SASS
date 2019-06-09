@@ -1,0 +1,38 @@
+@keyframes moveInLeft {
+   0% {
+      opacity: 0;
+      transform: translateX(-10rem)    /* negative moves left on the x axis */
+   }
+   80% {
+      transform: translateX(1rem)      /* positive moves right on the x axis */
+   }
+   100%{
+      opacity: 1;
+      transform: translateX(0)         /* Translate at 0 to look exactly like it does right now */
+   }
+}
+
+@keyframes moveInRight {
+   0% {
+      opacity: 0;
+      transform: translateX(10rem)     /* negative moves left on the x axis */
+   }
+   80% {
+      transform: translateX(-1rem)     /* positive moves right on the x axis */
+   }
+   100%{
+      opacity: 1;
+      transform: translateX(0)         /* Translate at 0 to look exactly like it does right now */
+   }
+}
+
+@keyframes moveInBottom {
+   0% {
+      opacity: 0;
+      transform: translateY(3rem)      /* negative moves left on the x axis */
+   }
+   100%{
+      opacity: 1;
+      transform: translateY(0)         /* Translate at 0 to look exactly like it does right now */
+   }
+}
