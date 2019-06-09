@@ -1,0 +1,166 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+  /* good practice - using inheritance */ }
+
+html {
+  /* font-size: 10px; */
+  /* bad practice, overrides users ability to increase font size */
+  font-size: 62.5%;
+  /* best practice, .625x16=10px conversion */ }
+
+body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  /* font-size: 16px; */
+  line-height: 1.7;
+  color: #777;
+  padding: 3rem;
+  /* Padding around the whole web page*/
+  box-sizing: border-box;
+  /* using inheritance */ }
+
+.header {
+  height: 95vh;
+  /* Vertical height of this element box should be 95% of the viewport height */
+  background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.8), rgba(40, 180, 133, 0.8)), url(../img/hero.jpg);
+  background-size: cover;
+  background-position: top;
+  /* Ensure the image stays at the top regardless of viewport */
+  position: relative;
+  /* Sets the Parent element origin position as a reference point */
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%); }
+  .header__logo-box {
+    position: absolute;
+    top: 4rem;
+    /* Starts to count from parent element origin i.e. .header position */
+    left: 4rem;
+    /* Starts to count from parent element origin i.e. .header position */ }
+  .header__logo {
+    height: 3.5rem;
+    /* size of the image. Browser can figure out the width if none specified */ }
+  .header__text-box {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* background: red; */
+    /* Demonstration box for center an object */
+    text-align: center;
+    /* Moves text elements to the center - helps with the button */ }
+
+.heading-primary {
+  color: #fff;
+  text-transform: uppercase;
+  backface-visibility: hidden;
+  /* Fix for the shaking - no one knows why animation shakes */
+  margin-bottom: 6rem; }
+  .heading-primary--main {
+    display: block;
+    /* The span element is inline by default. Block makes it sit on own line */
+    font-size: 6rem;
+    font-weight: 400;
+    letter-spacing: 3.5rem;
+    /* Adds spacing to each letter */
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    /* 
+      animation-delay: 3s;
+      animation-iteration-count: 3; 
+      */ }
+  .heading-primary--sub {
+    display: block;
+    /* The span element is inline by default. Block makes it sit on own line */
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1.75rem;
+    animation: moveInRight 1s ease-out; }
+
+@keyframes moveInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-10rem); }
+  80% {
+    transform: translateX(1rem); }
+  100% {
+    opacity: 1;
+    transform: translateX(0); } }
+
+@keyframes moveInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(10rem); }
+  80% {
+    transform: translateX(-1rem); }
+  100% {
+    opacity: 1;
+    transform: translateX(0); } }
+
+@keyframes moveInBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(3rem); }
+  100% {
+    opacity: 1;
+    transform: translateY(0); } }
+
+.btn:link, .btn:visited {
+  text-transform: uppercase;
+  text-decoration: none;
+  /* Removes the default style of links */
+  padding: 1.5rem 4rem;
+  display: inline-block;
+  /* Box model works on this inline element */
+  border-radius: 10rem;
+  /* Rounds the edges of the rectangle button */
+  transition: all .2s;
+  /* Shorthand of the transition */
+  position: relative;
+  /* For the ::after pseudo element to sit behind the parent */
+  font-size: 1.6rem; }
+
+.btn:hover {
+  transform: translateY(-0.3rem);
+  /* Negative moves the element up on Y axis */
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+  /* x axis, y axis, blur, color */ }
+  .btn:hover::after {
+    transform: scaleX(1.5) scaleY(1.6);
+    /* Increase the size of the element */
+    opacity: 0;
+    /* Fade pseudo-element out */ }
+
+.btn:active {
+  transform: translateY(-0.1rem);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); }
+
+.btn--white {
+  background-color: #fff;
+  color: #777; }
+  .btn--white::after {
+    background-color: #fff; }
+
+.btn::after {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  /* In relation to the parent element */
+  width: 100%;
+  /* In relation to the parent element */
+  border-radius: 10rem;
+  position: absolute;
+  /* Position below parent element */
+  top: 0;
+  left: 0;
+  z-index: -1;
+  /* Defines position of elements if one on top another */
+  transition: all .4s; }
+
+.btn--animated {
+  animation: moveInBottom .5s ease-out .75s;
+  animation-fill-mode: backwards;
+  /* Automatically apply style of 0% before animation starts */ }
