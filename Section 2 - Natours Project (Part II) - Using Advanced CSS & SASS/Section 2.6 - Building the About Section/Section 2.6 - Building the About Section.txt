@@ -1,0 +1,62 @@
+Section 2.6 Building the About Section:
+
+--------------------------------------
+Learning Outcome
+--------------------------------------
+> Thinking about components
+> How and why to use utility classes
+> How to use the background-clip property
+> How to transform multiple properties simultaneously
+> How to use the outline-offset property together with outline
+> How to style elements that are not hovered while others are
+
+
+--------------------------------------
+Thinking about components
+--------------------------------------
+- We should always break down the components of what we are building i.e. think, build architect mindset.
+- So headings and paragraphs can be considered elements of the typography.
+- The button would be considered a secondary button.
+- The images composition can be treated as a component (a reusable piece of code or module that can be used on other parts of the website).
+- We would always start with the HTML and then style the elements.
+- The <main> html element tells the search engine/screen reader that this is the main part of our site. So we have a <header>, <main> and a <footer> to our websites.
+- We use the _home.scss to style our page because the style we would apply to the about page is very specific to the home page and will not appear anywhere else even if the website grows.
+
+--------------------------------------
+How to use the background-clip property
+--------------------------------------
+- When creating the About section we will notice that there is a triangle wedge in the heading section. This breaks the seamlessness of the page and we need to find a way to move the About section up and remove the white triangle wedge (since our about section is a light grey colour).
+- In our _header.scss file we can see the header height is 95vh and the polygon clip path we created goes until 75vh. Therefore 95vh-75vh = 20vh which is the difference.
+- To move the About section up we an specify the margin-top and provide a negative margin i.e. -20vh to move the section up. This will now remove the white triangle wedge and make the home and about page look seamless and connected.
+- Using the CSS display property, we can change a block item to display as an inline-block element which will make a block item not take up 100% of its available width.
+- The new -webkit-background-clip property allows us clip the background to where the text sits which gives us the gradient text effect.
+- We would need to make the text transparent in order to view the background-clip image using the color property. This will provide us the gradient text effect.
+
+
+--------------------------------------
+Transform multiple properties simultaneously
+--------------------------------------
+- The CSS transform property allows us to transform multiple properties at the same time.
+- We have already seen previously the translate, translate x and y, scale and rotate transformations.
+- The skew transformation allows us to skew a element in the x and y position. We define the skew in degrees for example:
+   skewY(20deg)
+- The skew is not just rotating but is skewing the text to a certain specified degrees.
+- We can use multiple transform properties all att the same time to create a very special effect.
+
+
+--------------------------------------
+How and why to use utility classes
+--------------------------------------
+- If we want to center a text on the page, we would wrap the element in a parent div and center the text using the parent. We can use a concept called utility class as demonstrated below:
+   <div class="u-center-text">
+      <h2 class="heading-secondary">Exciting tours for adventurous people</h2>
+   </div>
+
+- We use the div class as a utility class to center the object in this case the text using CSS targeting this class.
+- Utility Classes in CSS are simple classes with one simple goal. In the above example case, it is simply to center the text. We can use many other utility classes to do other simple goals such as margin spacing etc. The purpose of this is to be able to reuse the CSS properties on the class.
+- We can add the SCSS/CSS for utilties within the sass/base/_utilites.scss file.
+   .u-center-text{ text-align: center; }
+
+- The text above will now be centered because the <h2> is a inline-block element due to the inline-block property applied to the heading-secondary class, and so if we asign the parent element text-align: center then the inline-block element inside it is treated as text and therefore be centered in the parent.
+
+- We should get use to thinking in reusable and independent notion with regards to our interfaces and this goes back to the first part of thinking about components.
