@@ -60,3 +60,34 @@ How and why to use utility classes
 - The text above will now be centered because the <h2> is a inline-block element due to the inline-block property applied to the heading-secondary class, and so if we asign the parent element text-align: center then the inline-block element inside it is treated as text and therefore be centered in the parent.
 
 - We should get use to thinking in reusable and independent notion with regards to our interfaces and this goes back to the first part of thinking about components.
+
+
+--------------------------------------
+Outline-offset property
+--------------------------------------
+- The outline property allows us to create an outline for example if we want to create a outline around our image. The first parameter is the size of the outline, the second is the style and the third is the colour of the outline.
+   outline: 1.5rem solid $colour-primary;
+
+- This will look similar to the border property. However, the outline property allows us to use outline-offset property unlike the border.
+   outline-offset: 2rem;
+
+- The outline-offset will provide a gap between the outline and the element it is wrapping. For example, this will provide a gap/offset between the outline and the image, providing a unique border style around the image (which cannot be performed using the border CSS property).
+
+
+--------------------------------------
+Style elements not hovered
+--------------------------------------
+- The below scss/sass code can be used to select elements that are not hovered in order to style them while other elements are hovered.
+   .composition {
+      &:hover &__photo:not(:hover) {
+
+      }
+   }
+
+- The above is the same as writing regular CSS of:
+   composition:hover composition__photo:not(:hover) {
+
+   }
+
+- The above means, when we hover over the .composition element then select the composition__photo which are not hovered. This will then allow us to style all elements within the .composition that are not hovered.
+- We can now target both hovered items and non hovered items to apply different CSS styles accordingly.
