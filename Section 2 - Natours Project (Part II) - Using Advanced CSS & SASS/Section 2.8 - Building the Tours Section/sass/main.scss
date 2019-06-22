@@ -1,0 +1,27 @@
+// Abstract Partials:
+@import "abstracts/functions";
+@import "abstracts/mixins";
+@import "abstracts/variables";
+
+// Base Partials:
+@import "base/animations";
+@import "base/base";
+@import "base/typography";
+@import "base/utilities";
+
+// Components Partials:
+@import "components/button";
+@import "components/card";
+@import "components/composition";
+@import "components/feature-box";
+
+// Layouts Partials:
+@import "layouts/float-grid-demo";
+@import "layouts/header";
+
+// Pages Partials:
+@import "pages/home";
+
+// Themes Partials:
+
+// Vendors Partials:

@@ -1,0 +1,158 @@
+Section 2.8 Building the Tours Section:
+
+--------------------------------------
+Learning Outcome
+--------------------------------------
+> How to build rotating card
+> How to use perspective in CSS
+> How to use the backface-visibility property
+> Using background blend modes
+> How and when to use box-decoration-break
+
+
+--------------------------------------
+Rotating Cards
+--------------------------------------
+- Below is an example HTML markup for a card element on a page:
+   <div class="row">
+      <div class="col-1-of-1">
+         <div class="card">
+            Card Text
+         </div>
+      </div>
+   </div>
+
+- We would create a _card.scss file within the components folder because this will be a component which can be reused all over our website. Below is some simple card styling:
+   .card {
+      background-color: orangered;
+      height: 50rem;
+   }
+
+- To create a rotating card effect we need to create a transform which rotates the card element. We want to rotate 180deg which is half of a circle (360deg is a full circle). We also want to rotate on the Y axis to rotate the card vertically (from side to side).
+- We need the transition property to give the transform some form of animation in order for it to work.
+   .card {
+      background-color: orangered;
+      color: #fff;
+      font-size: 2rem;
+      height: 50rem;
+      transition: all 0.8s;
+
+      &:hover {
+         transform: rotateY(180deg);
+      }
+   }
+
+- If we rotated on the X axis this would flip the card horizontally (i.e. from top to bottom).
+- We can add a more appealing visual where the card appears to rotate towards us by using perspective.
+
+
+--------------------------------------
+Perspective in CSS
+--------------------------------------
+- To add perspective we need to define the perspective on the parent element of where the transform occurs.
+- Using the above example, what this means is that we should define the perspective property on the card and then have a child element for the rotation. For example:
+
+HTML:
+   <div class="row">
+      <div class="col-1-of-1">
+         <div class="card">
+            <div class="card__side">
+               Front
+            <div>
+         </div>
+      </div>
+   </div>
+
+SCSS/CSS:
+   .card {
+      perspective: 150rem;
+      -moz-perspective: 150rem;
+
+      &__side {
+         background-color: orangered;
+         color: #fff;
+         font-size: 2rem;
+         height: 50rem;
+         transition: all .8s;
+      }
+
+      &:hover &__side {
+         transform: rotateY(180deg);
+      }
+   }
+
+- When adding the perspective, we need to use a very large amount of pixels to the perspective property for example 1500px (or 150rem).
+- The lower the value the more dramatic the effect is while the higher the value the less dramatic it is. This is a little experimentation on the value, until we get the visual effect we want.
+- To make this work on mozilla firefox, we also need to add the firefox prefix.
+- In the html markup we need a child element which we create using a div and assigning a class element of card__side. This will represent one side of the card.
+- When we hover the card, we want the card__side element to transform by rotating to 180deg on the Y axis. Therefore, we include &__side to target the card__side element. This is the same as saying in CSS:
+   .card:hover .card__side {}
+- We do not have the hover on the card__side because we are later going to have more than one side to the card i.e. a front and reverse side. Therefore, we only want the hover to occur on the main card class component (i.e. the main block).
+- We will notice that the text will appear on the other side in reverse, this is because we are now viewing the card from the back. To complete the rotating card effect we do not want to see the front text on the back.
+
+
+--------------------------------------
+Backface-visibility Property
+--------------------------------------
+HTML:
+   <div class="row">
+      <div class="col-1-of-1">
+         <div class="card">
+            <div class="card__side card__side--front">
+               Front
+            <div>
+            <div class="card__side card__side--back">
+               Back
+            <div>
+         </div>
+      </div>
+   </div>
+
+- We would add a modifier property (i.e. card__side--front/card__side--back) to distinguish the two classes so that we can target each modifier class in our CSS style properties.
+- Before we hover, the side--back of the card is already rotated 180deg. So when we hover on the card only the front side is rotated 180deg while the back is rotated back to 0deg.
+
+SCSS/CSS:
+   .card {
+      perspective: 150rem;
+      -moz-perspective: 150rem;
+      position: relative;
+      height: 50rem;
+
+      &__side {
+         color: #fff;
+         font-size: 2rem;
+         height: 50rem;
+         transition: all .8s ease;
+         position: absolute;
+         top: 0;
+         left: 0;
+         width: 100%;
+         backface-visibility: hidden;
+
+         &--front {
+            background-color: orangered;
+         }
+
+         &--back {
+            background-color: yellow;
+            transform: rotateY(180deg);
+         }
+      }
+
+      &:hover &__side--front {
+         transform: rotateY(180deg);
+      }
+      &:hover &__side--back {
+         transform: rotateY(0);
+      }
+   }
+
+- This will create two cards the front above the bottom. If we hover the front will rotate 180deg while the bottom will rotate back to 0deg - i.e. they are the reverse of each other.
+- To create the final effect, the cards needs to be on top of one another to make one card. We would use absolute positioning for this. We would add this to the .card__side class as this is the class common to both the front and back modifier classes.
+- We use the top and left properties to make the cards both start from the same position when they are drawn on the page.
+- We must remember to always give the parent a relative position. The parent in the above example is the .card class.
+- By giving absolute positioning, the elements is basically start fitting to their width (and we would see the Front is slightly wider than Back because Front has more characters than the text Back). To correct this issue, we need simply need to add a width to the .card__side property.
+- Finally, we need the backface-visibility property. This allows us to hide the back part of an element. Therefore the reverse text will now be hidden using this property, completing the rotating card effect.
+- Because we took all the elements out of their natural flow using absolute positioning, the parent .card element collapsed and lost its height. When this happens with floats we have a clearfix. When this happens with absolutes, there is no such thing as a clearfix. There is nothing we can do wih pure CSS.
+- To correct this, we have to specify the same height property to the .card element itself. This will correct the perspective of the element.
+- We can use the ease transition timing function to blend the animation.
