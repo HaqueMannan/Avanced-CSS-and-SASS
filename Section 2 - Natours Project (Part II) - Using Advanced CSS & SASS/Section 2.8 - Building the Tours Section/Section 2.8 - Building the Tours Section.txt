@@ -77,7 +77,7 @@ SCSS/CSS:
       }
 
       &:hover &__side {
-         transform: rotateY(180deg);
+         transform: rotateY(-180deg);
       }
    }
 
@@ -140,14 +140,15 @@ SCSS/CSS:
       }
 
       &:hover &__side--front {
-         transform: rotateY(180deg);
+         transform: rotateY(-180deg);
       }
       &:hover &__side--back {
          transform: rotateY(0);
       }
    }
 
-- This will create two cards the front above the bottom. If we hover the front will rotate 180deg while the bottom will rotate back to 0deg - i.e. they are the reverse of each other.
+- This will create two cards the front above the bottom. If we hover the front will rotate -180deg while the bottom will rotate back to 0deg - i.e. they are the reverse of each other.
+- A positive rotation will rotate the element forward while a negative will rotate in reverse.
 - To create the final effect, the cards needs to be on top of one another to make one card. We would use absolute positioning for this. We would add this to the .card__side class as this is the class common to both the front and back modifier classes.
 - We use the top and left properties to make the cards both start from the same position when they are drawn on the page.
 - We must remember to always give the parent a relative position. The parent in the above example is the .card class.
@@ -156,3 +157,103 @@ SCSS/CSS:
 - Because we took all the elements out of their natural flow using absolute positioning, the parent .card element collapsed and lost its height. When this happens with floats we have a clearfix. When this happens with absolutes, there is no such thing as a clearfix. There is nothing we can do wih pure CSS.
 - To correct this, we have to specify the same height property to the .card element itself. This will correct the perspective of the element.
 - We can use the ease transition timing function to blend the animation.
+
+
+
+--------------------------------------
+Background Blend Modes
+--------------------------------------
+- There are some great effects that we can apply to background images using blend modes that we cannot apply with normal images. Therefore, we can create a div element that will have CSS properties to add an image rather than using the <img> html element to add a normal image.
+- The html special symbol &nbsp; adds a space:
+   <div class="card_picture card_picture--1"> &nbsp; </div>
+
+- In the SCSS, we can target the modifier class to add the background image via CSS using background-image: url(). 
+- When specifying the folder location of the image, we need to assume the starting location from the css folder containing the compiled style.css file and not from our sass folder.
+- Therefore, we would move up one folder and then into the img folder rather than moving up two folders from the sass/components folder.
+   &__picture {
+      background-size: cover;
+      height: 23rem;
+
+      &--1 {
+         background-image: url(../img/nat-5.jpg);
+      }
+   }
+
+- We add a height property to show more of the image because we have no content in the picture element, only a small portion of the picture will be showing due to a small height.
+- The background blend mode property describes how the elements background images should blend. So imagine if we had multiple backgrounds and we want them to blend. We can use this property to achieve this effect.
+- We can blend a background image with a linear-gradient which is also considered a background-image property in CSS.
+- We can add multiple background image by separating each image with a comma. The order of the image is important as the first image specified sits on top of the next and so on.
+      &--1 {
+         background-image: linear-gradient(to right bottom, $colour-secondary-light, $colour-secondary-dark), url(../img/nat-5.jpg);
+      }
+
+- Using the background blend mode on the parent element will blend the background-images as seen below:
+   &__picture {
+      background-size: cover;
+      height: 23rem;
+      background-blend-mode: screen;
+      -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+      clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+
+      &--1 {
+         background-image: linear-gradient(to right bottom, $colour-secondary-light, $colour-secondary-dark), url(../img/nat-5.jpg);
+      }
+   }
+
+- This is a new CSS property and may not work on all browsers. We can use the following website to see what CSS properties are supported by which browsers:
+   https://caniuse.com/
+- There are many blend modes that we can use - in the above example we used screen which overlays the gradient colours over the image. Blend modes works exactly how they do on graphical software such as Photoshop.
+- We would notice the rounding of the cards have dissapeared and this is because the background-image is sitting above the card. To fix this, we would set a property called overflow to hidden wherever the border-radius property exists:
+   &__side {
+      ...
+      border-radius: 3px;
+      overflow: hidden;
+   }
+- The image is overflowing the parent and by setting this to hidden will hide the parts that are overflowing.
+- We can combine this with clip path to cut out from the background image.
+- We should always place the webkit version above the new css property.
+
+
+--------------------------------------
+The box-decoration-break Property
+--------------------------------------
+- The box-decoration-break is a new CSS property.
+- For this property to work we need to create a new element within the header element tag:
+   <h4 class="card__heading">
+      <span class="card__heading-span">The Sea Explorer</span>
+   </h4>
+- The span element simply wraps around the text. We can target this element with our CSS property.
+- When the width of the text is small, the text will fall onto the next line. However, it is treated as one text. Therefore the padding will apply at the beinning of the first line of text and at the end of the second line of text. For example (the - resembles the padding);
+   ---The Sea
+   Explorer---
+
+- The box-decoration-break allows us to treat each line of text as if they were their own elements.
+   &__heading {
+      font-size: 2.8rem;
+      font-weight: 300;
+      text-transform: uppercase;
+      text-align: right;
+      color: $colour-white;
+      position: absolute;
+      top: 12rem;
+      right: 2rem;
+      width: 75%;
+   }
+
+   &__heading-span {
+      padding: 1rem 1.5rem;
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+
+      &--1 {
+         background-image: linear-gradient(to right bottom, 
+         rgba($colour-secondary-light, .85), 
+         rgba($colour-secondary-dark, .85));
+      }
+   }
+- This will now apply the padding to the left and right of both text lines as if they were both their own elements for example:
+   ---The Sea---
+   ---Explorer---
+
+- Google Chrome does not support box-decoration-break at the moment and so we require the -webkit- prefix to make this CSS property work on Chrome browsers.
+- The clone value simply applies all the declarations that we have in the selector to all of the boxes that are created by an element i.e. 1 element two boxes but both boxes styled in the same way as each other.

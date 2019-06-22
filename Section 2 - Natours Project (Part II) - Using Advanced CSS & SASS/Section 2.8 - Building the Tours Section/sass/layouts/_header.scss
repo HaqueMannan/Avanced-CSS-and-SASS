@@ -9,6 +9,7 @@
    background-position: top;     /* Ensure the image stays at the top regardless of viewport */
    position: relative;     /* Sets the Parent element origin position as a reference point */
 
+   -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
 
    &__logo-box {
