@@ -1,0 +1,78 @@
+Section 2.7 Building the FeatureAbout Section:
+
+--------------------------------------
+Learning Outcome
+--------------------------------------
+> How to include and use an icon font
+> Another way of creating the "skewed section" design
+> How and when to use the direct child selector
+
+
+--------------------------------------
+Icon Fonts
+--------------------------------------
+- There are many different websites that provide web icon fonts such as:
+   https://fontawesome.com/
+   http://linea.io/
+   https://octicons.github.com/
+   https://www.s-ings.com/typicons/
+   https://vorillaz.github.io/devicons/#/dafont
+
+- In this project we used linea fonts by downloading the file from the website. Within the _basic/_ICONFONT folder contains all the vectors of the icon fonts.
+- Vectors allow us to scale up or down the icons without distorting the image unlike png/jpeg files. Therefore, we should always use vectors as icon fonts. 
+- SVG's are even better but more advanced and we will use this in another project.
+- We need to copy the fonts folder and the styles.css file into our project in order to use the icon font within our project. This should be pasted within our CSS project folder. We should rename the styles.css file to something like icon-font.css (something to separate from our style.css file).
+- We need to add a link to our icon-font.css file within the html header.
+   <link rel="stylesheet" href="css/icon-font.css">
+- We can now start using the icon-font within our project.
+
+
+--------------------------------------
+Skewed Section Design
+--------------------------------------
+- We could use the clip path again like we did on the heading, however, there is another alternative method to create a skewed section design.
+- We can skew the entire section using the transform: skewY() property on our section class.
+- We will skew on the Y axis for example:
+   .section-features {
+      ...
+      background-size: cover;
+      transform: skewY(-7deg);
+   }
+- This will skew all elements within the .section-feature div class. A negative number will skew the contents upwards while a positive value skews the content downwards.
+- To reduce the white gap, we would move the entire class div element upwards to cover the white space. We can do this using the margin-top property and using a negative number to move the content up.
+
+
+--------------------------------------
+When to use Direct Child Selector
+--------------------------------------
+- When we have an entire section skewed but would like to revert some elements within the section to its origianl orientation, we would need to skew these elements in the opposite direction.
+- We can use the direct child selector pseudo element allows us to select child elements directly.
+      .section-features {
+      ...
+      transform: skewY(-7deg);
+
+      & > * {
+
+      }
+   }
+
+- The direct child selector is represented by the left arrow (>) and the asterisk (*) tells the CSS to select all of the direct child selectors using the universal selector.
+- This will select all direct child of the .section-features element because we called this within the class using the & sign. The above syntax would look like in compiled CSS:
+   .section-features > *
+
+- If we look at the html markup, the above will be selecting the .row direct child. If we did not use the direct child symbol and selected all child, this will apply to all child elements which is not what we want.
+   <section class="section-features">
+      <div class="row">
+         <div class="col-1-of-4">
+            <div class="feature-box">
+               <i class="feature-box__icon icon-basic-world"></i>
+               <h3 class="heading-tertiary u-margin-bottom-small">Explore the world</h3>
+               <p class="feature-box__text">Aperiam sequi recusandae voluptas, totam facilis quae, natus earum esse rerum.</p>
+            </div>
+         </div>
+         ...
+      </div>
+   </section>
+
+- The direct child will only select the first child that it comes across and then apply the CSS properties.
+- This allows us to compensate for the skewing of the parent class element of the entire section content.
