@@ -1,0 +1,57 @@
+Section 2.9 Building the Stories Section:
+
+--------------------------------------
+Learning Outcome
+--------------------------------------
+> How to make text flow around shapes with shape-outside and float
+> How to apply a filter to images
+> How to create a background video covering an entire section
+> How to use the <video> HTML element
+> How and when to use the object-fit property
+
+
+--------------------------------------
+Text Flow with shape-outside and float
+--------------------------------------
+- Semantically, it is correct to create a <figure> html element because we are going to have an image together with a caption. In HTML5 we have this element to add the image with a caption element.
+   <figure class="story__caption">
+      <img src="" alt="">
+   </figure>
+- Using the float property we can float the text around an object - for example floating the text to the left of the image.
+
+HTML:
+   <figure class="story__shape">
+      <img src="" alt="">
+   </figure>
+   <div class="story__caption">
+      <h3>Heading Text</h3>
+      <p>More Additional Text</p>
+   </div>
+
+SCSS:
+   .story {
+      ...
+
+      &__shape {
+         width: 15rem;
+         height: 15rem;
+         float: left;
+         background-color: orangered;
+         -webkit-shape-outside: circle(50% at 50% 50%);
+         shape-outside: circle(50% at 50% 50%);
+
+         -webkit-clip-path: circle(50% at 50% 50%);
+         clip-path: circle(50% at 50% 50%);
+
+         transform: translateX(-3rem);
+      }
+   }
+
+- The shape-outside property allows us to float the text around a shape for example the outside of the circle.
+- We need to define a vectorised shape for the text to wrap around. We can use a polygon, circle, ellipses etc. to create the vectorised shape as the value.
+- The two values passed in circle() is the radius and the centre of the circle.
+- 50% radius is half of the width and height of the element. In the above example this is half of 15rem.
+- at 50% 50% means the center of the circle horizontally and vertically.
+- In order for this to work the element must be floated and must have defined dimensions i.e. width and height.
+- Using the clip-path we can make the shape a circle to finish off the effect of text wrapping around the circle image.
+- The best way to move around an element that has been floated is by not actually messing with the margin or anything like that, but we should only use the transform: translate property.
