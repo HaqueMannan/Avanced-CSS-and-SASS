@@ -69,3 +69,64 @@ Apply Filter to Images
       transform: translateX(-4rem) scale(1);
       filter: blur(3px) brightness(80%);
    }
+
+
+--------------------------------------
+Background Video & <video> HTML Element
+--------------------------------------
+- To create a background video, we would add an element that is the same size of the section it is going to cover and add the video to that <div> container. We always start with the HTML semantic first.
+- In HTML5 there is a <video> element that we can embed a video. We use the <source> tag to embed the video link.
+   <section class="section-stories">
+      <div class="bg-video">
+         <video class="bg-video__content" autoplay muted loop>
+            <source src="img/video.mp4" type="video/mp4">
+            <source src="img/video.webm" type="video/webm">
+            Your browser is not supported!
+         </video>
+      </div>
+   </section>
+
+- We would specify the source and then the source type when using the <source> element.
+- Below is a very useful free resource website to download cover videos:
+   https://coverr.co/
+- This website provides videos in both the mp4 and webm formats. We require both formats to ensure the video will work across all modern web browsers.
+- The <source> attribute allows us to add more than one source which is useful for performance for devices and other screen sizes which in turn helps with users data plans on mobile phones.
+- We also add a text to display in the event that the videos does not work on a clients browser (in the event the user are using a very old browser that does not support the video formats).
+- We can specify commands for the video such as autoplay, muted, loop, etc.
+- Autoplay is usually considered a bad thing to apply, but in this case since it is a background video and muted, it is not a problem or annoyance.
+- We can create a new component scss file for the background video, in case we want to apply this component to more areas of the webpage. This will allow us to style the element to be a background video.
+   .bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+   }
+
+- This will make the container position absolute and therefore we must make the parent element (i.e. the section holding the video) position relative.
+   .section-stories {
+      padding: 15rem 0;
+      position: relative;
+   }
+
+--------------------------------------
+How to Use the object-fit Property
+--------------------------------------
+- So far the background video is overflowing i.e. it is taking its entire width and not filling the entire section.
+- Targeting the video__content, adding the height and width of 100% will not fix the issue alone as this would make the background video cover less of the section because it is maintaining the aspect ratio of the original video. 
+- The object-fit property allows us to occupy the entire section but also maintain the aspect ratio.
+- The object-fit is a new CSS property.
+   .bg-video {
+      ...
+      overflow: hidden;
+
+      &__content {
+         height: 100%;
+         width: 100%;
+         object-fit: cover;
+      }
+   }
+
+- This is similar to the background-size: cover property that we use for background-image. The object-fit property works with html elements where it fits the element within the parent element.
+- There are other values that we can use such as fill, contain or cover. The fill and contain are not as useful compared to the cover as they lose the aspect ratio.
+- We can use the overflow: hidden on the parent element to fix any overflowing of the child element.
