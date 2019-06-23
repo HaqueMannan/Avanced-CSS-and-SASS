@@ -5,8 +5,8 @@ Learning Outcome
 --------------------------------------
 > How to implement "solid-colour gradients"
 > How the general and adjacent sibling selectors work and why we need them
-> How to use the ::input-placeholder pseudo-element
-> How and when to use the :focus, :invalid, placeholder-shown and :checked pseudo-classes
+> How to use the ::input-placeholder pseudo element
+> How and when to use the :focus, :invalid, placeholder-shown and :checked pseudo classes
 > Techniques to build custom radio buttons
 
 
@@ -26,3 +26,66 @@ Implement solid-colour Gradients
 - This will provide us with a solid gradient effect from white to orangered.
 - Transparent is a valid CSS colour and we can use it in our solid-gradient. This will allow us to create an awesome effect without using any clip-path properties.
 - This demonstrates different tools available to us for different situations.
+
+
+--------------------------------------
+Input-Placeholder Pseudo Elements
+--------------------------------------
+- The ::-webkit-input-placeholder so far only works on Safari and Chrome but may be implemented in other browsers as well.
+- Pseudo-elements are with two colons (::) while pseudo-classes are with with colon (:).
+- Pseudo-elements represent things that are already on the web page for example input elements would already exists on the page.
+- Pseudo-classes are used for states such as the focus.
+
+
+--------------------------------------
+Other Input Pseudo Elements
+--------------------------------------
+- The :focus pseudo class is when we focus on a input. We can remove the default browser's blue border style by focusing on the this pseudo element.
+   &__input {
+      ...
+      border-bottom: 3px solid transparent;
+
+      &:focus {
+         outline: none;
+         box-shadow: 0 1rem 2rem rgba($colour-black, .1);
+         border-bottom: 3px solid $colour-primary;
+      }
+   }
+
+- The focus is very important for those users who use only use keyboard without a mouse to navigate web pages. So when they move around the web page with their keyboard, they need to know where or which form elements are actually focused.
+- We should always make the form elements that are focused visible to the user for example we can create our own style such as a box-shadow or a border-bottom.
+- We should add the border-bottom also to the initial state but using a transparent colour as this will fix the form labels moving down when focused due to the margin bottom property on the focus.
+
+- The :valid and :invalid pseudo class allows us to add styling to elements which are valid or invalid. For example, Chrome and other browsers can check for us whether a valid email has been entered in an email input field.
+- We usually want the validation styling to apply when the input field is focused.
+   &:focus:invalid {
+      border-bottom: 3px solid $colour-secondary-dark;
+   }
+
+- The :placeholder-shown pseudo class allows us to style elements when the placeholder is shown in the input field.
+   &__input:placeholder-shown &__label{}
+
+- We will notice that the above will not work if the elements are siblings (i.e. at the same level in the html. Both are children of the form__group element). This is where we require the adjacent sibling selector to target both class elements in our CSS.
+
+
+--------------------------------------
+General & Adjacent Sibling Selectors
+--------------------------------------
+- The adjacent sibling selector allows us to target sibling elements. For example:
+HTML:
+   <div class="form__group">
+      <input type="text" class="form__input" placeholder="Full Name" id="name" required>
+      <label for="name" class="form__label">Full Name</label>
+   </div>
+
+SCSS:
+   form__input:placeholder-shown + &__label {
+      opacity: 0;
+      visibility: hidden;
+   }
+
+- The form__input and form__label are both children to form_group. Therefore, we require the adjacent sibling selector to select both siblings to target our styles.
+- An adjacent sibling is a sibling that comes immediately after the element we selected in the first place of our CSS/SCSS. In the above we first selected __input and then selected the adjacent sibling which is label. We did this using the plus sign (+).
+- If we want to select general siblings i.e siblings which are not adjacent, we would use the tilde (~) symbol instead.
+- The above allows us to add styling to the label element when the input placeholder is visible/shown.
+- Having the opacity to 0 allows us to animate as we cannot animate on the visibility property.
