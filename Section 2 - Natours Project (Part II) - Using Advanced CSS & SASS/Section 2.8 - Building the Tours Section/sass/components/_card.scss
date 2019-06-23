@@ -58,11 +58,11 @@
       }
 
       &--2 {
-         background-image: url(../img/nat-5.jpg);
+         background-image: linear-gradient(to right bottom, $colour-primary-light, $colour-primary-dark), url(../img/nat-6.jpg);
       }
 
       &--3 {
-         background-image: url(../img/nat-5.jpg);
+         background-image: linear-gradient(to right bottom, $colour-tertiary-light, $colour-tertiary-dark), url(../img/nat-7.jpg);
       }
    }
 
@@ -88,6 +88,18 @@
          rgba($colour-secondary-light, .85), 
          rgba($colour-secondary-dark, .85));
       }
+
+      &--2 {
+         background-image: linear-gradient(to right bottom, 
+         rgba($colour-primary-light, .85), 
+         rgba($colour-primary-dark, .85));
+      }
+
+      &--3 {
+         background-image: linear-gradient(to right bottom, 
+         rgba($colour-tertiary-light, .85), 
+         rgba($colour-tertiary-dark, .85));
+      }
    }
 
    &__details {
@@ -108,5 +120,31 @@
             }
          }
       }
+   }
+
+   //REVERSE SIDE STYLING
+   &__cta {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      text-align: center;
+   }
+
+   &__price-box {
+      text-align: center;
+      color: $colour-white;
+      margin-bottom: 8rem;
+   }
+
+   &__price-only {
+      font-size: 1.4rem;
+      text-transform: uppercase;
+   }
+
+   &__price-value {
+      font-size: 6rem;
+      font-weight: 100;
    }
 }
