@@ -1,0 +1,28 @@
+Section 2.10 Building the Booking Section:
+
+--------------------------------------
+Learning Outcome
+--------------------------------------
+> How to implement "solid-colour gradients"
+> How the general and adjacent sibling selectors work and why we need them
+> How to use the ::input-placeholder pseudo-element
+> How and when to use the :focus, :invalid, placeholder-shown and :checked pseudo-classes
+> Techniques to build custom radio buttons
+
+
+--------------------------------------
+Implement solid-colour Gradients
+--------------------------------------
+- On the background-size property we can use cover or percentages as the value. If we use 100% as the value, this is the same as saying cover because we want the size to be the whole of the container where the background image is applied.
+- A solid-colour gradient is using a solid colour transforming into a transparent colour.
+- To apply this effect we add a background-image.
+   .book {
+      background-image: linear-gradient(105deg, rgba($colour-white, .9) 0%, rgba($colour-white, .9) 49.9%, orangered 50%);
+   }
+
+- We can use degrees to determine the direction of the gradient.
+- The important part of this effect is specifying the percentages i.e. at which point should the colour be. So in the above example we want at 0% to be a 90% transparent white, at 49.9% again the transparent white and then at 50% orangered.
+- We use 49.9% as this will work on all browsers and provide a smooth gradient transition (whereas using 50% will only work on Firefox and Safari but not perfectly with Chrome).
+- This will provide us with a solid gradient effect from white to orangered.
+- Transparent is a valid CSS colour and we can use it in our solid-gradient. This will allow us to create an awesome effect without using any clip-path properties.
+- This demonstrates different tools available to us for different situations.
