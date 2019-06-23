@@ -13,15 +13,18 @@ Learning Outcome
 --------------------------------------
 Text Flow with shape-outside and float
 --------------------------------------
-- Semantically, it is correct to create a <figure> html element because we are going to have an image together with a caption. In HTML5 we have this element to add the image with a caption element.
+- Semantically, it is correct to create a <figure> html element because we are going to have an image together with a caption. In HTML5 we have this element to add the image with a <figcaption> element.
    <figure class="story__caption">
       <img src="" alt="">
+      <figcaption">Caption</figcaption>
    </figure>
+
 - Using the float property we can float the text around an object - for example floating the text to the left of the image.
 
 HTML:
    <figure class="story__shape">
       <img src="" alt="">
+      <figcaption">Caption</figcaption>
    </figure>
    <div class="story__caption">
       <h3>Heading Text</h3>
@@ -55,3 +58,14 @@ SCSS:
 - In order for this to work the element must be floated and must have defined dimensions i.e. width and height.
 - Using the clip-path we can make the shape a circle to finish off the effect of text wrapping around the circle image.
 - The best way to move around an element that has been floated is by not actually messing with the margin or anything like that, but we should only use the transform: translate property.
+
+
+--------------------------------------
+Apply Filter to Images
+--------------------------------------
+- Filter is a CSS property that allows us to apply many different filters on our images for example blur, brightness, contrast, saturate, invert, etc.
+- Numbers below 100% darkens an image while above 100% brightens the image using the brightness image filter.
+   &:hover &__img {
+      transform: translateX(-4rem) scale(1);
+      filter: blur(3px) brightness(80%);
+   }
