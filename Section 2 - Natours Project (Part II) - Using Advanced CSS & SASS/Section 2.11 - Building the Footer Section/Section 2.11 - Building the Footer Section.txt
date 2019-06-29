@@ -1,0 +1,109 @@
+Section 2.11 Building the Footer Section:
+
+--------------------------------------
+Learning Outcome
+--------------------------------------
+> How to design a simple website footer
+
+
+--------------------------------------
+Website Footer
+--------------------------------------
+- Within the <body> tags we would create a <footer> element within our HTML file. This will semantically declare all content within this tag as part of the footer of our website. Therefore, all websites should have a header, main and footer elements within their markup.
+   <header> </header>
+   <main> </main>
+   <footer> </footer>
+
+- In the BEM notation each element should receive a class.
+- Below is a simple footer HTML example:
+
+HTML
+   <footer class="footer">
+      <div class="footer__logo-box">
+         <img src="img/logo-green-2x.png" alt="Full logo" class="footer_log">
+      </div>
+      <div class="row">
+         <div class="col-1-of-2">
+            <div class="footer__navigation">
+               <ul class="footer__list">
+                  <li class="footer__item"><a href="#" class="footer__link">Company</a></li>
+                  <li class="footer__item"><a href="#" class="footer__link">About</a></li>
+                  <li class="footer__item"><a href="#" class="footer__link">Contact Us</a></li>
+               </ul>
+            </div>
+         </div>
+         <div class="col-1-of-2">
+            <p class="footer__copyright">
+               Built by <a href="#" class="footer__link">Name</a>. Copyright &copy; by Name. You are 100% allowed to use this webpage for both personal and commercial use, but NOT to claim it as your design. A credit to the original author, Name, is of course highly appreciated!
+            </p>
+         </div>
+      </div>
+   </footer>
+
+- The &copy; HTML entity allows us to add a copyright symbol on our page.
+- You can add any copyright message to make the license free for others to use or protect your intellectual design.
+- We can design the footer using CSS/SASS to target the element class as we have been doing in the other previous sections.
+
+SCSS
+   .footer {
+      color: $colour-grey-light-1;
+      background-color: $colour-grey-dark-3;
+      padding: 10rem 0;
+      font-size: 1.4rem;
+
+      &__logo-box {
+         text-align: center;
+         margin-bottom: 8rem;
+      }
+
+      &__logo {
+         width: 15rem;
+         height: auto;
+      }
+
+      &__navigation {
+         border-top: 1px solid $colour-grey-dark;
+         padding-top: 2rem;
+         display: inline-block;
+      }  
+
+      &__list {
+         list-style: none;
+      }
+
+      &__item {
+         display: inline-block;
+         &:not(:last-child) {
+            margin-right: 1.5rem;
+         }
+      }
+
+      &__link {
+         &:link,
+         &:visited {
+            color: $colour-grey-light-1;
+            background-color: $colour-grey-dark-3;
+            text-decoration: none;
+            text-transform: uppercase;
+            display: inline-block;
+            transition: all .2s;
+         }
+
+         &:hover,
+         &:active {
+            color: $colour-primary;
+            box-shadow: 0 1rem 2rem rgba($colour-black, .4);
+            transform: rotate(5deg) scale(1.3); 
+         }
+      }
+
+      &__copyright {
+         border-top: 1px solid $colour-grey-dark;
+         padding-top: 2rem;
+         width: 80%;
+         float: right; 
+      }
+   }
+
+- The _footer.scss will sit in the layouts folder as this is a layout similar to our header.
+- We would have created and styled a simple footer element on our web page.
