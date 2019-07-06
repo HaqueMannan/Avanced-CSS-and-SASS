@@ -184,3 +184,79 @@ SCSS
 - The column and hyphens property allows us to get closer to the tradition print designs that we would see in a magazine or newspaper layout. This is also the reason for why these properties was introduced in CSS.
 - The hyphens property requires a lot of prefixes to make it work in most modern browsers. The same also applies for columns.
 - Important Note: there are tools that we can use to help with dealing with prefixes but for now we are writing them manually for learning. One of such tools is called autoprefixer.
+
+
+--------------------------------------
+The :target Pseudo-class
+--------------------------------------
+- To make the popup work is by taking advantage of something that exists in HTML which is called anchors.
+- We can add id to our html elements and id's are unique. On our button href we can link this to an id which will create an anchor. This would mean when we click on a button it will take us to the anchor/target and this will also be displayed in the browser.
+
+HTML
+   <section class="section-about" id="section-about">
+   <a href="#section-about">Click Me</a>
+
+Browser link updated when button clicked: 
+   http://127.0.0.1:5500/index.html#section-about
+
+- Display none is not the best way to hide the popup window because we will not be able to animate it. We should use opacity instead as we can manipulate the number value over time.
+- We would use the anchor and the target to make the CSS popup work without any JavaScript.
+- In our HTML we would need to find all the buttons that we want to create an anchor for our popup window.
+   <a href="#popup" class="btn btn--white">Book now!</a>
+- This will now be the button we would need to click to show our popup.
+- We need to add the id to the popup element.
+   <div class="popup" id="popup"></div>
+- Now when we click the button(s) which has the anchor, this will target the popup element which has the anchor id.
+
+- In our SCSS/CSS we can now use the :target pseudo-class.
+   .popup {
+      ...
+      opacity: 0;
+      visibility: hidden;
+      transition: all .3s;
+
+      &:target {
+         opacity: 1;
+         visibility: visible;
+      }
+   }
+- We have the pseudo-class called :target which applies to the element which is the target when we click on a button i.e. when the URL changes to having target in it.
+   http://127.0.0.1:5500/index.html#popup
+- Changing the opacity and visibility to the opposite of the initial state will display the popup window.
+
+To recap:
+1. We have a button with a href anchor e.g. #popup. As soon as we click it, the anchor (id) gets added to the URL. Therefore, #popup becomes the target.
+2. Since the element has an id="#popup" the target is basically the entire element.
+3. As soon as the element becomes the target, the pseudo-class called :target is available on it and so we can select that element using the pseudo-class as seen in the above example and specify our CSS styles.
+
+- To close the popup window, we need a close button in the HTML of our popup element. This will need a a href anchor/id which will update the URL link.
+- If the popup is no longer the target, the :target pseudo-class styling will no longer apply (the style disappears) and the popup window will be hidden again i.e. back to the initial state.
+
+HTML
+   <div class="popup" id="popup">
+      <div class="popup__content">
+         <a href="#section-tours" class="popup__close">&times;</a>
+         ...
+      </div>
+   </div>
+
+CSS/SCSS
+   &__close {
+      &:link,
+      &:visited {
+         color: $colour-grey-dark;
+         position: absolute;
+         top: 2.5rem;
+         right: 2.5rem;
+         font-size: 3rem;
+         line-height: 1;
+         text-decoration: none;
+         display: inline-block;
+         transition: all .2s;
+      }
+
+      &:hover {
+         color: $colour-primary;
+      }
+   }
+- We now have a modal/popup window that appears on our page using purely CSS when we click on a button and we can also dismiss it with a click of a close button.
