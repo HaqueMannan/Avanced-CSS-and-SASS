@@ -1,0 +1,186 @@
+Section 2.13 - Building a Pure CSS Popup:
+
+--------------------------------------
+Learning Outcome
+--------------------------------------
+> How to build a nice popup with only CSS
+> How to use the :target pseudo-class
+> How to create boxes with equal height using display: table-cell
+> How to create CSS text columns
+> How to automatically hyphenate words using hyphens
+
+
+--------------------------------------
+Pure Popup with only CSS
+--------------------------------------
+- We want to create a pure CSS popup window where we can click a button and the background turns dark and a card pops onto the screen using a smooth animation.
+- This popup will sit on top of the whole web page at a fixed position regardless if we scroll up or down the page.
+- We can achieve this without the checkbox hack by using the :target pseudo-class.
+- We can add this card popup wherever we want on our markup because it is not tied to any of the sections or anything. It may be preferable to place this at the very end of our markup code (even after the footer).
+
+HTML
+   <div class="popup">
+      <div class="popup__content">
+         POPUP
+      </div>
+   </div>
+
+sass/abstracts/_mixin.scss:
+   @mixin absCenter {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+   }
+
+sass/components/_popup.scss:
+   .popup {
+      height: 100vh;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: rgba($colour-black, .8);
+      z-index: 9999;
+
+      &__content {
+         @include absCenter;
+         height: 50rem;    //Purpose for testing the card style (get rid later)
+         width: 75%;
+         background-color: $colour-white;
+         box-shadow: 0 2rem 4rem rgba($colour-black, .2);
+         border-radius: 3px;
+      }
+   }
+
+
+--------------------------------------
+Boxes With Equal Height (display: table-cell)
+--------------------------------------
+- To create boxes of equal height, we would need to start with the html markup.
+
+HTML
+   <div class="popup">
+      <div class="popup__content">
+         <div class="popup__left">
+            <img src="img/nat-8.jpg" alt="Tour photo">
+            <img src="img/nat-9.jpg" alt="Tour photo">
+         </div>
+         <div class="popup__right">
+            <h2 class="heading-secondary">Start booking now</h2>
+            <h3 class="heading-tertiary">Important &ndash; Please read these terms before booking.</h3>
+            <p class="popup__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            <a href="#" class="btn btn--green">Book Now</a>
+         </div>
+      </div>
+   </div>
+
+- The &ndash; is another HTML entities which creates a long dash/hyphen.
+- We have two <div> elements one for each sie of the box i.e. left and right that we can style to have the same height in our CSS. 
+
+SCSS:
+   &__content {
+      ...
+      display: table;
+      overflow: hidden;
+   }
+
+   &__left {
+      width: 33.33333%;
+      // float: left          // Does not make the left and right elements have the same height.
+      display: table-cell;
+      vertical-align: middle;
+   }
+
+   &__right {
+      width: 66.66667%;
+      // float: left;         // Does not make the left and right elements have the same height.
+      display: table-cell;
+      vertical-align: middle;
+      padding: 3rem 5rem;
+   }
+
+   &__img {
+      display: block;
+      width: 100%;
+   }
+
+   &__text {
+      font-size: 1.4rem;
+      margin-bottom: 4rem;
+   }
+
+- The &__img we want the image to take up the entire parent container width. We no longer need the height in the &__content style because we now have content in the popup window which should dictate the height.
+- The &__left style we want a width of a 1/3 while the &__right should have the remainder 2/3 of the width. What matters is both left and right should make 100% of the width.
+- We want to make the left and right boxes sit side by side.
+- The overflow hidden prevents the image from overflowing is parent container which helps bring back the border radius of the popup window.
+- We can use float: left property on both &__left and &__right elements to achieve this, however, the small issue with this is that the left element will have the entire height while the right element will only have the height that it occupies. This is complete normal behaviour.
+- What we want is both left and right to have the exact same height as each other. This will make it easier to center the right side vertically in the middle of the whitespace.
+- The alternative approach is to simulate a table by setting the display property to table-cell. The parent element i.e. &__content has to be set to display: table. The browser will give the table-cells automatically the same height.
+- We can use the vertical-align property which works on table cells to align content vertically to the top, middle or bottom.
+- We are using the CSS properties to fake a table without using the actual HTML table elements.
+
+
+--------------------------------------
+CSS Text Columns
+--------------------------------------
+- Column layout is something new in CSS but we can make it work in most of the modern browsers.
+- Al we have to do is specify the column-count property. This will automatically create us columns. There are other column related properties such as column-gap to specify the space between the columns. The default gap is 1em which would translate to the font size of the current element (below 1em = 14px).
+- The column-rule is like a border created in the inbetween the columns.
+   &__text {
+      font-size: 1.4rem;
+      margin-bottom: 4rem;
+
+      -moz-column-count: 2;
+      -moz-column-gap: 4rem;
+      -moz-column-rule: 1px solid $colour-grey-light-2;
+      column-count: 2;
+      column-gap: 4rem;
+      column-rule: 1px solid $colour-grey-light-2;
+   }
+
+[Calculation:
+   1em = 1 x current elements font size.
+   1.4rem = 1.4rem x 10px = 14px
+   1rem x 14px = 14px
+]
+
+
+--------------------------------------
+Auto Hyphenate Text
+--------------------------------------
+- To add automatic hyphenations to text, we can use the CSS text property hyphens.
+- There are three possibilities/values we can assign to this property:
+   1. none (default)
+   2. manual
+   3. auto
+- The none and manual properties are not very useful for the hyphens property as the none is the default value while manual allows us to specify in our HTML where to add the hyphens in the text itself.
+- Auto will figure out where to add the hyphens within our text automatically based on the size of the browser and the space/container available for our text element content.
+- For this to also work, we need to define in the HTML the document language as well. Below the language for our web page is english.
+
+HTML
+   <!DOCTYPE html>
+   <html lang="en">
+
+SCSS
+   ...
+   &__text {
+      font-size: 1.4rem;
+      margin-bottom: 4rem;
+
+      -moz-column-count: 2;
+      -moz-column-gap: 4rem;
+      -moz-column-rule: 1px solid $colour-grey-light-2;
+      column-count: 2;
+      column-gap: 4rem;
+      column-rule: 1px solid $colour-grey-light-2;
+
+      -moz-hyphens: auto;
+      -ms-hyphens: auto;
+      -webkit-hyphens: auto;
+      hyphens: auto;
+   }
+
+- The column and hyphens property allows us to get closer to the tradition print designs that we would see in a magazine or newspaper layout. This is also the reason for why these properties was introduced in CSS.
+- The hyphens property requires a lot of prefixes to make it work in most modern browsers. The same also applies for columns.
+- Important Note: there are tools that we can use to help with dealing with prefixes but for now we are writing them manually for learning. One of such tools is called autoprefixer.

@@ -1,0 +1,16 @@
+*,
+*::after,
+*::before {
+   margin: 0;
+   padding: 0;
+   box-sizing: inherit;       /* good practice - using inheritance */
+}
+
+html {
+   /* font-size: 10px; */     /* bad practice, overrides users ability to increase font size */
+   font-size: 62.5%;          /* best practice, .625x16=10px conversion */
+}
+
+body {
+   box-sizing: border-box;    /* using inheritance */
+}
