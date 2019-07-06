@@ -4,7 +4,7 @@ Section 2.12 Building the Navigation:
 Learning Outcome
 --------------------------------------
 > What the "checkbox hack" is and how it works
-> How to create custom animation timing functions using cubic bezier curves
+> How to create custom animation timing functions using cubic-bezier curves
 > How to animate "solid-colour gradients"
 > How and why to use transform-origin
 
@@ -59,6 +59,7 @@ CSS:
       top: 6rem;
       right: 6rem;
       z-index: 2000;
+      box-shadow: 0 1rem 3rem rgba($colour-black, .1);
    }
 
    &__background {
@@ -70,6 +71,7 @@ CSS:
       right: 6.5rem;
       background-image: radial-gradient($colour-primary-light, $colour-primary-dark);
       z-index: 1000;
+      transition: transform .8s;
    }
    ...
 }
@@ -88,14 +90,18 @@ CSS:
 
    &__nav {
       height: 100vh;
-      width: 100%;
       position: fixed;
       top: 0;
       right: 0;
       z-index: 1500;
+
+      opacity: 0;
+      width: 0;
+      transition: all .8s;
    }
 - We use the <nav> element which will be a huge element occupying the entire viewport so that we can then centre the navigation list both horizontally and vertically.
 - The <nav> element is a block level element and will automatically occupy 100% of its whole width and so it is not necessary to specify the width of this element but we can if we want to.
+- Setting the opacity and width to 0 will hide the navigation elements. This will remove the navigation links from our page. We will use the checkbox hack to display them again.
 - We use position fixed because even if we scroll the navigation should remain fixed on the page.
 - The button should always be on top of everything but the nav elements should be on top of the background and therefore the z-index should be a value inbetween the other two values.
 
@@ -106,6 +112,7 @@ CSS:
       transform: translate(-50%, -50%);
       list-style: none;
       text-align: center;
+      width: 100%;
    }
 
    &__item {
@@ -135,3 +142,32 @@ CSS:
       }
    }
 - These are the styles used to style the navigation link items and add transition animations on the hover active pseudo class state.
+
+   &__checkbox:checked ~ &__background {
+      transform: scale(80);
+   }
+
+   &__checkbox:checked ~ &__nav {
+      opacity: 1;
+      width: 100%
+   }
+- We first select the checkbox input item and use the :checked pseudo class to see if the checkbox is checked. We then use the sibling selector but we do not want the adjacent sibling because we are not targeting the direct sibling but we want to target the navigation__background sibling. Therefore, we would use the general sibling selector.
+- We would transform the scale of the background image to cover the page.
+- We would do the same for the navigation_nav to change the opacity and width to display the links.
+- This will complete the checkbox hack to display the navigation when the checkbox is checked.
+- We need the transition property on both parent elements to apply the animations.
+
+
+--------------------------------------
+Cubic-Bezier Curves
+--------------------------------------
+- There are a bunch of built-in timing functions such as ease-in, ease-out, ease-in-out, etc.
+- We can build our own custom timing functions using the cubic-bezier function.
+- In the cubic-bezier function, we need to pass in four numbers to define the cubic-bezier transition.
+- We can use the following website to get the parameters needed for our desired timing transition effect.
+   https://easings.net/en
+   https://cubic-bezier.com/
+
+Examples of cubic-bezier:
+   transition: transform .8s cubic-bezier(0.86, 0, 0.07, 1);
+   transition: all .8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
