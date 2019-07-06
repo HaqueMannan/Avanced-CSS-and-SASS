@@ -1,0 +1,137 @@
+Section 2.12 Building the Navigation:
+
+--------------------------------------
+Learning Outcome
+--------------------------------------
+> What the "checkbox hack" is and how it works
+> How to create custom animation timing functions using cubic bezier curves
+> How to animate "solid-colour gradients"
+> How and why to use transform-origin
+
+
+--------------------------------------
+The Checkbox Hack
+--------------------------------------
+- The checkbox hack allows us to create a navigation effect.
+- The navigation button will remain in the same place no matter where we scroll to on our page. 
+- When the button is clicked, the navigation will cover the whole page and when clicked again the navigation closes back into the button.
+- This is all controlled by the checkbox hack which uses the same technique for the custom radio button but using the checkbox instead.
+- Step 1: create a hidden checkbox input button.
+- Step 2: create a label (which will act as the button) linked/connected to the checkbox.
+- Step 3: reveal the navigation background when the checkbox becomes checked using the checked pseudo class in CSS to style the navigation.
+- The navigation should be the first element within our entire web document which would be held in the <body> of our HTML document before the <header> element.
+
+HTML
+   <body>
+      <div class="navigation">
+         <input type="checkbox" class="navigation__checkbox" id="navi-toggle">
+
+         <label for="navi-toggle" class="navigation__button">MENU</label>
+
+         <div class="navigation__background">&nbsp;</div>
+
+         <nav class="navigation__nav">
+            <ul class="navigation__list">
+               <li class="navigation__item"><a href="#" class="navigation__link">About Natours</a></li>
+               <li class="navigation__item"><a href="#" class="navigation__link">Your Benefits</a></li>
+               <li class="navigation__item"><a href="#" class="navigation__link">Popular Tours</a></li>
+               <li class="navigation__item"><a href="#" class="navigation__link">Stories</a></li>
+               <li class="navigation__item"><a href="#" class="navigation__link">Book Now</a></li>
+            </ul>
+         </nav>
+      </div>
+      ...
+   </body>
+
+- The html &nbsp; is used for a black space in HTML which allows us to have an empty background.
+- We use the nav element as the container that will hold all our our navigation links in our unordered list so that we can style this whole element to cover the entire page when the navigation is toggled.
+
+
+CSS:
+.navigation {
+   ...
+   &__button {
+      background-color: $colour-white;
+      height: 7rem;
+      width: 7rem;
+      border-radius: 50%;
+      position: fixed;
+      top: 6rem;
+      right: 6rem;
+      z-index: 2000;
+   }
+
+   &__background {
+      height: 6rem;
+      width: 6rem;
+      border-radius: 50%;
+      position: fixed;
+      top: 6.5rem;
+      right: 6.5rem;
+      background-image: radial-gradient($colour-primary-light, $colour-primary-dark);
+      z-index: 1000;
+   }
+   ...
+}
+- The position: fixed is the same as absolute but instead the element is fixed to the page and does not move when we scroll the page. It allows us to take the element out of the natural flow and allows us to specify it in relation to a positioned element using the top, left, right and bottom properties.
+- We are positioning the background circle behind the button, as we can use the effect for the background to grow and cover the page when the button is clicked.
+- Radial-gradient allows us to create a circular gradient starting from the middle out in comparison to the linear gradient which goes from one side to another.
+- The z-index allows us to place this above all elements by using a high number. This property only works on elements which has its position defined.
+- The button element is slightly larger than the background to initially cover the background. When the button is clicked we can animate it to grow to cover the whole page.
+- The background is 6.5rem for top and right properties in order for it to sit centre behind the button.
+- The z-index for the button should be higher in order for it to sit above the background.
+
+   &__checkbox {
+      display: none;
+   }
+- The display none property will hide the checkbox because we would not want to see the checkbox on our page, hence the checkbox hack for our navigation.
+
+   &__nav {
+      height: 100vh;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      right: 0;
+      z-index: 1500;
+   }
+- We use the <nav> element which will be a huge element occupying the entire viewport so that we can then centre the navigation list both horizontally and vertically.
+- The <nav> element is a block level element and will automatically occupy 100% of its whole width and so it is not necessary to specify the width of this element but we can if we want to.
+- We use position fixed because even if we scroll the navigation should remain fixed on the page.
+- The button should always be on top of everything but the nav elements should be on top of the background and therefore the z-index should be a value inbetween the other two values.
+
+   &__list {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      list-style: none;
+      text-align: center;
+   }
+
+   &__item {
+      margin: 1rem;
+   }
+
+   &__link {
+      &:link,
+      &:visited {
+         display: inline-block;
+         font-size: 3rem;
+         font-weight: 300;
+         padding: 1rem 2rem;
+         color: $colour-white;
+         text-decoration: none;
+         text-transform: uppercase;
+         background-image: linear-gradient(120deg, transparent 0%, transparent 49.9%, $colour-white 50%);
+         background-size: 230%;
+         transition: all .4s;
+      }
+
+      &:hover,
+      &:active {
+         background-position: 100%;
+         color: $colour-primary;
+         transform: translateX(1rem);
+      }
+   }
+- These are the styles used to style the navigation link items and add transition animations on the hover active pseudo class state.
