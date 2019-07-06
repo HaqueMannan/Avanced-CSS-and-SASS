@@ -60,6 +60,8 @@ CSS:
       right: 6rem;
       z-index: 2000;
       box-shadow: 0 1rem 3rem rgba($colour-black, .1);
+      text-align: center;
+      cursor: pointer;
    }
 
    &__background {
@@ -171,3 +173,73 @@ Cubic-Bezier Curves
 Examples of cubic-bezier:
    transition: transform .8s cubic-bezier(0.86, 0, 0.07, 1);
    transition: all .8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+
+--------------------------------------
+Transform Origin
+--------------------------------------
+- To create the hamburger button which transforms from a 3 line to an X mark when the button is clicked and reverts back when clicked again, we can use the pseudo ::before and ::after elements for this effect.
+
+HTML
+   <label for="navi-toggle" class="navigation__button">
+      <span class="navigation__icon">&nbsp;</span>
+   </label>
+
+CSS/SCSS
+   &__icon {
+      position: relative;
+      margin-top : 3.5rem;
+
+      &,
+      &::before,
+      &::after {
+         width: 3rem;
+         height: 2px;
+         background-color: $colour-grey-dark-3;
+         display: inline-block;
+      }
+
+      &::before,
+      &::after {
+         content: "";
+         position: absolute;
+         left: 0;
+         transition: all .2s;
+      }
+
+      &::before { top: -.8rem; }
+      &::after { top: .8rem; }
+   }
+
+   &__button:hover &__icon::before {
+      top: -1rem;
+   }
+
+   &__button:hover &__icon::after {
+      top: 1rem;
+   }
+- In order for the ::before and ::after pseudo elements to appear on the page we need to define their content and display property. To position the bars for these pseudo elements we would use position absolute for this.
+- The text-align: centre on the navigation__button class will center the span element as it is considered a text element. We then apply margin-top to move the hamburger icon down.
+
+
+   &__checkbox:checked + &__button &__icon {
+      background-color: transparent;
+   }
+
+   &__checkbox:checked + &__button &__icon::before {
+      top: 0;
+      transform: rotate(135deg);
+   }
+
+   &__checkbox:checked + &__button &__icon::after {
+      top: 0;
+      transform: rotate(-135deg);
+   }
+- We use the + in the sibling selector because it is an adjacent sibling (we do not need ~ for the general sibling selector). So what we have done is select the brother/sister sibling of the checkbox which is called navigation__button and then we selected the navigation__button child which is navigation__icon.
+- The ::before and ::after pseudo elements both relies on the size of the original element because they are positioned in relation to that size. If we remove the size property i.e. the width and the height of the element, we would then end up changing the position of the pseudo elements which we do not want to do. We change the background colour to transparent to hide the original span line rather than changing its size.
+- This will create the transition from a Hamburger icon to an X icon on click of the button.
+
+- An alternative method, we could also use the transform-origin which describes where the transformation happens. 
+- For example if we transform-origin right, the element will remain in the exact same place but transform from the right side of the origin, in the above case this would be rotate from the right side (and left if we specified left).
+- Sometimes when we want to rotate something, this can be really helpful in order to rotate exactly where we want it.
+- If we do not specify the transform-origin, the transform will by default apply to the center of the element.
