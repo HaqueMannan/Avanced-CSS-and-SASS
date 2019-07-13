@@ -1,0 +1,83 @@
+Section 3.1 -  Power of Sass Mixins to Write Media Queries:
+
+--------------------------------------
+Learning Outcome
+--------------------------------------
+> How to use a powerful Sass mixin to write all our media queries
+> How to use @content and @if Sass directives
+> Taking advantage of Chrome DevTools for responsive design
+
+
+--------------------------------------
+Sass Mixin and Media Queries
+--------------------------------------
+- To add a media query, some developers would create a media query file and have all their media queries within one file.
+- Another method is to write the media queries within the sass file which we want to add a media query declaration for a particular selector. Example:
+   html {
+      font-size: 62.5%;
+
+      @media (max-width: 600px) {
+         font-size: 50%;
+      }
+   }
+- We can have many small @media queries or one large @media query within our sass file will not be a problem at all.
+
+- Imagine if we would have to write all our @media queries in all our selectors and in all of our different sass files and in all of the elements that we have selected that we want to change, we would have to keep writing the @media query which would be a lot of work.
+- Even worse, imagine if someday we decide to change our breakpoint, we would then need to go back and change all of the @media queires max-width numbers.
+- There is a better way of writing our @media queries by using sass mixin which will paste our code wherever we use our mixins.
+- We should always determine whether we are going to use a Desktop first or Mobile first approach to determine our @media queries breakpoints.
+
+- In the sass/abstracts/_mixins.scss file, we can add the following code:
+   @mixin respond-phone {
+      @media (max-width: 600px) { @content }
+   }
+- The max-width is used for desktop first approach while the min-width property is used for mobile first approach i.e. max-width will look for the display size is smaller than 600px to apply the style (vice versa if using min-width).
+
+
+--------------------------------------
+The @content and @if
+--------------------------------------
+- We use the @content directive to allow us to pass in a block of code into the mixin which allows our mixin to be dynamic as we can pass in our declaration as block code content. We can now use this mixin in our sass files:
+   @include respond-phone {
+      font-size: 50%;
+   }
+- The @content is different to passing in parameters into our mixin as this allows us to pass in block of code directly into our mixin.
+- We can take our @media mixins a step further to make it more efficient. The above method would require us to have multuple mixins for each breakpoint, which is not what we want. We want one huge mixin that covers all of the cases for our breakpoint. We can use the power of @if to achieve this:
+   @include respond($breakpoint) {
+      @if $breakpoint == phone {
+         @media (max-width: 600px) { @content }
+      }
+      @if $breakpoint == tablet {
+         @media (max-width: 900px) { @content }
+      }
+   }
+- It is good practice to document/comment arguments.
+- The @if directive allows us to add if statements similar to any programming language e.g. JavaScript, Python, C#, etc.
+- The @if will check for the statement to be true and if so it will run the particular block of code. This helps us to write one mixin for all breakpoints.
+- We can now use the mixin and pass in the argument to determine the breakpoint and add the content.
+   @include respond(phone) {
+      font-size: 50%;
+   }
+
+- Note: the arrangement of the media queries is important because if two of the media queries applies and are conflicting, both blocks will apply but the last code will override the first style code. For example if we have a display size of 500px both statement are true but the tab-port style will be applied overriding the tab-land styling:
+   @include respond(tab-land) { // width < 900px?
+      font-size: 56.25%;      // 1rem = 9px, 9/16= 0.5625
+   }
+   @include respond(tab-port) { // width < 600px?
+      font-size: 50%;         // 1rem = 8px, 8/16= 0.5
+   }
+- Rule of thumb is to always apply the larger size styling first before the smaller ones. This will ensure the smaller sizing will override the larger styles when the screen is smaller.
+- Note: if we want the @media queries to be effected by the font-size of the page (should the user change the font-size in their browser) we would not use px but rather the rem unit which will convert into px.
+- The em and rem units in media queries are not effected by our root font-size settings. This would mean 1em or 1rem in a media query is always equal to the font-size which is coming from the browser, which is by default 16px.
+- We would use em and not rem in our media queires because rems fails within browsers and so em unit is the best option for media queries.
+- Calculation 1em = 16px
+- Conversion calculation n/16 = em. e.g. 600px/16px = 37.5em
+- The entire web page layout will now be responsive (dependant) to the font-size which is a good thing for responsive design as we can now change the font-size which the em and rem units will scale up or down according to the font-size value.
+
+
+--------------------------------------
+Chrome DevTools
+--------------------------------------
+- The Chrome DevTools allows us to test our web designs on different screen size without manually increasing and decreasing the browser size (which is not the best practice).
+- If we open the developer tools in our Chrome browser, there is a Toggle device toolbar (represented by a mobile and tablet icon). Clicking on this tool will provide us with a responsive screen.
+- We can now change the size of the responsive screen within the browser rather than the browser itself.
