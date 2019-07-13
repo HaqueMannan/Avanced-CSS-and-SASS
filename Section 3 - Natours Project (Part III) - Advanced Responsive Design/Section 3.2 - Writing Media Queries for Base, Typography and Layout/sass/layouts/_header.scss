@@ -1,0 +1,38 @@
+.header {
+   height: 95vh;     /* Vertical height of this element box should be 95% of the viewport height */
+   background-image: linear-gradient(
+      to right bottom, 
+      rgba($colour-primary-light, 0.8),
+      rgba($colour-primary-dark, 0.8)), 
+   url(../img/hero.jpg);
+   background-size: cover;
+   background-position: top;     /* Ensure the image stays at the top regardless of viewport */
+   position: relative;     /* Sets the Parent element origin position as a reference point */
+
+   -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+   clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+
+   @include respond(phone) {
+      -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+      clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+   }
+
+   &__logo-box {
+      position: absolute;
+      top: 4rem;              /* Starts to count from parent element origin i.e. .header position */
+      left: 4rem;             /* Starts to count from parent element origin i.e. .header position */
+   }
+
+   &__logo {
+      height: 3.5rem;         /* size of the image. Browser can figure out the width if none specified */
+   }
+
+   &__text-box {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      /* background: red; */     /* Demonstration box for center an object */
+      text-align: center;        /* Moves text elements to the center - helps with the button */
+   }
+}

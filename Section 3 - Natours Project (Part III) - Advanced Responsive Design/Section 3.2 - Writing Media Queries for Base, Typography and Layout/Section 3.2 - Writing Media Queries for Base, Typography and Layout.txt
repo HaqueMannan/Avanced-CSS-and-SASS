@@ -1,0 +1,25 @@
+Section 3.2 - Writing Media Queries for Base, Typography and Layout:
+
+--------------------------------------
+Learning Outcome
+--------------------------------------
+> The order to writing our media queries for sass files.
+
+
+--------------------------------------
+Media Queries Order
+--------------------------------------
+- This is of personal preference, but may be a logical way of working when writing our media queries:
+   1. Base + Typography
+   2. General Layout + Grid
+   3. Page Layout
+   4. Components
+
+- In this section we have updated the base, typography and layout/grid scss files to include our media queries for responsive design.
+- The overall font-size takes care of most of the changes that we want to apply at different screen sizes and therefore we would not have many media code (i.e. only for minor styles where the font-size will not work).
+
+- We would use the Chrome DevTools to increase/decrease our screens to the various screen sizes and view what happens to our page.
+- Chrome also has a feature to show media queries which will represent a blue bar for max-width and orange bar for min-width queries. This will highlight when we change the size of the display so that we know which media queries are being triggered.
+- Using this tool we can visually see where we need to add @media queries to fix the styling of certain selector elements for the different display types.
+- Once we have written our queries using the browser, we could then start testing our designs on actual devices to see if the style applies the way we envisioned it and amend accordingly.
+- We can use the !important to ensure the style is applied when the CSS is applied to our web page.
