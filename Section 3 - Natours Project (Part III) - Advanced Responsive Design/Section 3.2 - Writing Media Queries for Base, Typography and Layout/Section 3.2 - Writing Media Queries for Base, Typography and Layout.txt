@@ -23,3 +23,6 @@ Media Queries Order
 - Using this tool we can visually see where we need to add @media queries to fix the styling of certain selector elements for the different display types.
 - Once we have written our queries using the browser, we could then start testing our designs on actual devices to see if the style applies the way we envisioned it and amend accordingly.
 - We can use the !important to ensure the style is applied when the CSS is applied to our web page.
+
+- A great website that we can use to view our online web page layouts and test our media queries on the many different device screen sizes:
+   https://sizzy.co/
