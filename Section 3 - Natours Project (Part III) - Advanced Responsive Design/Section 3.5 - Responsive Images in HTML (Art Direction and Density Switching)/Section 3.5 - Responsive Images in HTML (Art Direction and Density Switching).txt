@@ -1,0 +1,42 @@
+Section 3.5 - Responsive Images in HTML (Art Direction and Density Switching).:
+
+--------------------------------------
+Learning Outcome
+--------------------------------------
+> How to use the srcset attribute on the <img> and <source> elements, together with density descriptors
+> How and why to use the <picture> element for art direction
+> How to write media queries in HTML
+
+
+--------------------------------------
+Density Switching srcset and Density Descriptor
+--------------------------------------
+- The difference between images in HTML and in CSS; in HTML we use the <img> tags where we specify a source for the image. Within CSS we use background-images property.
+- There are more technology for doing responsive images in HTML.
+- Density switching is more simpler to perform.
+- The philosophy to density switching is to serve a larger version of the same image for high resolution screens and serve a smaller version of the same image for a low density screen. Therefore, we need two images, one for each of the resolutions
+- We can do this on the <img> element but change the src attribute to the srcset attribute. This allows us to specify two images. We use a density descriptor allows us to add a descriptor to our image:
+   <img srcset="img/logo-green-1x.png 1x, img/logo-green-2x.png 2x" alt="Full logo" class="footer__logo">
+
+- The srcset and density descriptor allows the browser to choose the best of the two images according to the screen used by the user to display the web page. Therefore, if it is a low density screen it will use the 1x version of the image, while a high density screen it will use the 2x version of the image.
+- This will allow the browser to choose the best image to serve the client/user based on the client screen density. This is the simpler method and use-case for responsive images in HTML.
+
+
+--------------------------------------
+Art Direction <picture> Element
+--------------------------------------
+- Art direction tells the browser to use one image on one screen width and another image on another screen width. Therefore, the image displayed will depend on the screen width. This allows us to serve two different images depending on the size of the client screen.
+- The solution for this is to use the HTML element <picture>, <source> and <img> element like so:
+   <picture class="footer__logo">
+      <source srcset="img/logo-green-small-1x.png 1x, img/logo-green-small-1x.png 2x" media="(max-width: 37.5em)">
+      <img srcset="img/logo-green-1x.png 1x, img/logo-green-2x.png 2x" alt="Full logo">
+   </picture>
+
+- This allows us to provide different options for the browser to display.
+- We always have to use at least one image and zero or more sources. Zero sources does not make sense so we would need at least one source and image. This will act as the fall-back.
+- We can use the srcset and media attributes on the source element, which is where the real magic of responsive image is applied.
+- The srceset attribute works exactly as we have seen above.
+- In the media attribute we can add a media query just like how we would do it in CSS using max-width or min-width properties.
+- We force the browser to use the image defined in our source element where the max-width is less than what is specified. If the screen is above the max-width, we would force the browser to use the image specified in our img element.
+- This allows us to create a art direction responsive image in HTML, whereby we serve different images based on the client viewport width.
+- Inside of the source/img we use density switching using the srceset attribute instead of using the src attribute. This allows the browser to have a choice to use either the higher or lower resolution image according to the client screen which the web page is being viewed on.
