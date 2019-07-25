@@ -1,0 +1,41 @@
+Section 3.7 - Responsive Images in CSS:
+
+--------------------------------------
+Learning Outcome
+--------------------------------------
+> How to implement responsive images in CSS
+> How to use resolution media queries to target high-resolution screens with 2x
+> How to combine multiple conditions in media queries
+
+
+--------------------------------------
+Responsive Images in CSS
+--------------------------------------
+- Responsive images in CSS is very easy to implement. All we have to do is write media queries in order to load different images for different situations.
+- So far we have only written media queries related to the screen or viewport-width. However, there are other types of media queries and one such example is to target the resolution.
+   @media (min-resolution: 192dpi) {
+      background-image: url(../img/hero.jpg);
+   }
+
+- The 192dpi (dots per inch) is used as a reference because that is the resolution of the apple retina screen which is a high resolution screen that is usually used as a reference.
+- This uses the same logic as the min-width i.e. when the resolution is higher than the min-width the styles will be applied.
+
+
+--------------------------------------
+Combine Multiple Conditions
+--------------------------------------
+- If we have a mobile that has a screen of 600px and has a density of 2x, the image we would need at this size does not have to be larger than 1200px (600px x 2). Therefore, a image of 1200px width is more than enough to display on a high density screen that has 600px.
+- There are no logic to load a huge image on a small screen. We can extend the media query logic by combining multiple conditions using the and keyword.
+   @media (min-resolution: 192dpi) and (min-width: 600px) { 
+      background-image: url(../img/hero.jpg);
+   }
+
+- The above will check that the resolution is higher than 192dpi (i.e. a 2x screen) AND above 600px screen width to display a higher resolution image for example a 2000px hero image.
+- We can combine more logic and use the comma (,) as an or statement:
+   @media (min-resolution: 192dpi) and (min-width: 600px), min-width: 2000px) { 
+      background-image: url(../img/hero.jpg);
+   }
+
+- The above will now check for whether the resolution is higher than 192dpi (i.e. a 2x screen) AND above 600px screen width OR the min-width is above 2000px in order to display the higher resolution image.
+- To convert the px to em we would divide by 16 e.g. 600px/16px = 37.5em
+- Basically, responsive images within CSS uses media queries and some logic in order to achieve the results that we want based on different viewport sizes and resolution of the screen.
