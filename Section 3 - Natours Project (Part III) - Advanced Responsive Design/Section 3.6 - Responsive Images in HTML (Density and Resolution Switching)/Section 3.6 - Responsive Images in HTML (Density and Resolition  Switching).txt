@@ -1,0 +1,23 @@
+Section 3.6 - Responsive Images in HTML (Density and Resolution Switching):
+
+--------------------------------------
+Learning Outcome
+--------------------------------------
+> How to allow the browser to decide the best image to download using the srcset attribute, width descriptors and the sizes attributes of the <img> element
+
+
+--------------------------------------
+Density and Resolution Switching
+--------------------------------------
+- Within the Chrome devtools we are able to turn on the option for Add device pixel ratio within the toggle device toolbar. This allows us to test if which image is displayed. Note: there are bugs with this in Chrome and the elements properties img tool may not show which image is being used correctly.
+- Resolution Switching allows the browser to choose the best image for the current viewport and pixel density of the client machine.
+- We would use an <img> element in our HTML and again use the srcset attribute to set the different image sources.
+   <img srcset="img/nat-1.jpg 300w, img/nat-1-large.jpg 1000w" sizes="(max-width: 900px) 20vw, (max-width: 600px) 30vw, 300px" src="img/nat-1-large.jpg">
+
+- This looks similar to density switching we saw before in section 3.5, however, with density switching we used something called a density descriptor. In resolution switching we use something called the width descriptor. This informs the browser of the width of the images.
+- The small image has a 300px width and therefore we wrote 300w as the width descriptor. This allows the browser to have the width information without having to download the image for the information.
+- We use the sizes attribute to inform the browser of the approximate width of the image at different viewport width. Therefore, with this sizes and the width descriptor attributes, the browser can figure out which is the best image to use for the current client viewport width and display resolution.
+- We use the max-width breakpoint for the sizes attribute value and determine the view-width. To calculate this we would use the devtools to view the current width of the image and divide by the breakpoint width to give a percentage vw figure. For example, 171/900 = 0.19 i.e. 20% which is represented by 20vw.
+- We can use a default vw value for the default pixel width size.
+- We would use the src attribute in the event where the user is using an older browser that does not support the srcset and sizes attributes. The src attribute will be ignored if the browser understands the srcset attribute.
+- The above HTML will take care of both resolution and density switching because we have given the browser enough information to figure out the best image to serve depending on both the viewport width and pixel density/screen resolution.
