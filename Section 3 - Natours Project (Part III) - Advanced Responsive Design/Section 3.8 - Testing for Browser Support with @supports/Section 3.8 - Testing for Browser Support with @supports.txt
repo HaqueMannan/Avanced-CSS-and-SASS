@@ -1,0 +1,40 @@
+Section 3.8 - Testing for Browser Support with @supports:
+
+--------------------------------------
+Learning Outcome
+--------------------------------------
+> How to use @supports feature queries
+> Implement graceful degradation on selected properties
+> How to use backdrop-filter
+
+
+--------------------------------------
+The @supports & Graceful Degradation
+--------------------------------------
+- Many new features are highly experimental and only work in top modern browsers.
+- We can use the following website to see which browser versions supports the property before applying it to production:
+   https://caniuse.com/
+- We can use graceful degradation with the @supports in order to provide support to both modern and older browsers (older browsers will use an adapted reduced version of the CSS property).
+- To add the functionality whereby a new feature should work in newer browser and have a different property applies to older browsers we would use the @supports. The example below uses the backdrop-filter which works on Safari but not Chrome.
+   @supports(-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px)) {
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      background-color: rgba($colour-black, .3);
+   }
+- We pass in the property within the @supports to tests/ask the browser to see if it supports the specified property.
+- We have to also specify the value of the property as well in our @supports test.
+- Just like media queries we can add logic using the or and and keywords.
+- We would define the properties if the test property is supported.
+- We have now implemented graceful degradation using the @supports query.
+- If the @supports query is not supported by the browser then simply the code within this block is not applied.
+
+
+--------------------------------------
+The Backdrop-Filter
+--------------------------------------
+- The backdrop-filter applies a filter to what is behind the selected element. For example we can have a popup card and use the backdrop-filter to blur the background rather than using a dark transparency background.
+   backdrop-filter: blur(10px);
+   background-color: rgba($colour-black, .3);
+
+- This adds a blur to the background while the selected element is in focus type of style to our web page.
+- The backdrop-filter does not currently work on Google Chrome, but it works with Safari.
