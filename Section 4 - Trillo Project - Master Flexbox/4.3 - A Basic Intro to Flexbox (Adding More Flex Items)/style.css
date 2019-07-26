@@ -1,0 +1,91 @@
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+.container {
+   background-color: #ccc;
+   padding: 10px;
+   height: 1000px;
+
+   /* FLEXBOX STYLE */
+   display: flex;                      /* Initiates the flexbox container */
+
+   flex-direction: row;                /* Default i.e. items left to right on main axis */
+   /* flex-direction: row-reverse;        Invert row direction on main axis i.e. items right to left */
+   /* flex-direction: column;             Column i.e. items top to bottom on main axis */
+   /* flex-direction: column-reverse;     Invert column direction on main axis i.e. bottom to top */
+
+   justify-content: center;            /* Control how items are positioned along the main axis */
+   /* justify-content: space-between;     Evenly distribute space between each item across main axis */
+   /* justify-content: space-around;      Ensure space on left and right side of the container */
+   /* justify-content: space-evenly;      Equal Space between the left and right side of each item */
+   /* justify-content: flex-end;          Align items on the right side */
+   /* justify-content: flex-start;        Default i.e. align items on the left side */
+
+   align-items: center;                /* Controls how items are positioned along the cross axis */
+   /* If one item is larger than the others, the align-items center value will align/center all other items relative to the larger item in the vertical direction i.e. the cross axis */
+   /* align-items: flex-start;            Align items at the top of the cross axis */
+   /* align-items: flex-end;              Align items at the bottom of the cross axis */
+   /* align-items: stretch;               Default i.e. items match the height of the highest flex item */
+   /* align-items: baseline;              Align all item text along the largest/common text */
+
+   /* It is important to understand where the main axis and cross axis are in order to use the justify and align properties correctly. If we use the flex-direction: row, then the main axis is horizontal and the cross axis is vertical. If we use the flex-direction: column, then the main axis is vertical and the cross axis is horizontal. This will impact on the justify-content and align-items properties behaviours. */
+
+   flex-wrap: wrap;                    /* Items wrap i.e. new line in container */
+   /* Initial value is no-wrap. However, override this and make items wrap the container i.e. it will create a new line within the flex-container to fit the items that cannot fit on the same line */
+
+   align-content: center;              /* Align the rows along the center of the cross axis */
+   /* align-content: flex-start;          Align the rows along the top of the cross axis */
+   /* align-content: flex-end;            Align the rows along bottom of the cross axis */
+   /* align-content: space-around;        Align the rows along the cross axis with equal gutter spacing */
+   /* align-content: space-between;       Align the rows along the cross axis, one at top and one bottom */
+   /* align-content: stretch;             Default i.e. stretches the rows, similar to space-between */
+   /* Align-Content is similar to align-items which aligns the flex-items, the align-content aligns the rows/column along the cross axis. Both rows will be aligned either to the top or bottom and all the empty space will sit below or top accordingly */
+}
+
+.item {
+   background-color: #f1425d;
+   padding: 30px;
+   margin: 30px;                       /* Defines the gutter/spacing between each item */
+   color: #fff;
+   font-size: 40px;
+
+   /* flex-grow: 1;                    Items occupies the entire space that they can */
+   flex: 1                             /* Shorthand for flex-grow, flex-shrink and flex-basis */
+}
+
+.i1 {
+   height: 200px;
+   /* flex-basis: 300px; */
+   /* flex-shrink: 0;                     Controls how an item can shrink */
+   /* flex-shrink has an initial value of 1 which means the element/item is allowed to shrink. Setting to 0 means the item is no longer allowed to shrink. The viewport will increase its width (creating a scrollbar) to fit the remaining clipped elements but the item applied to does not change its width as it is not allowed to shrink */
+
+   flex: 0 1 300px;                    /* Shorthand, must be in correct order of growth shrink basis */
+}
+
+.i2 {
+   /* Demonstrate align-items */
+   height: 200px;
+   
+   flex-grow: 3;                       /* Item triple the size of the other items (3 is triple of 1) */
+   flex-basis: 20%;                    /* Set the width of a flex-item without using the width property */
+   /* The initial value for flex-basis is auto. Therefore, we can override this on individual items */
+}
+
+.i3 {
+   order: -2;                          /* Position item to the front before i4 */
+}
+
+.i4 {
+   /* Demonstrate align-items: baseline */
+   /* font-size: 70px; */
+
+   align-self: flex-end;               /* Override the align-item property for a single item */
+   /* align-self: flex-start;             Align single item to the top of cross axis */
+   /* align-self: stretch;                Item stretched to the same height as the highest item */
+
+   order: -1;                          /* Default value is 0. -1 brings to start. 1 brings to end */
+   /* All items have a default value of 0. if we override a single item to have -1 as a value, it will reposition to the front while 1 will position it towards the end. Flexbox starts ordering from the lowest order number */
+}
