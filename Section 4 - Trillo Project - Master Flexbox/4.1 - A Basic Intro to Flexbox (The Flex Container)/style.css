@@ -1,0 +1,52 @@
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+.container {
+   background-color: #ccc;
+   padding: 10px;
+
+   /* FLEXBOX STYLE */
+   display: flex;                      /* Initiates the flexbox container */
+
+   flex-direction: row;                /* Default i.e. items left to right on main axis */
+   /* flex-direction: row-reverse;        Invert row direction on main axis i.e. items right to left */
+   /* flex-direction: column;             Column i.e. items top to bottom on main axis */
+   /* flex-direction: column-reverse;     Invert column direction on main axis i.e. bottom to top */
+
+   justify-content: center;            /* Control how items are positioned along the main axis */
+   /* justify-content: space-between;     Evenly distribute space between each item across main axis */
+   /* justify-content: space-around;      Ensure space on left and right side of the container */
+   /* justify-content: space-evenly;      Equal Space between the left and right side of each item */
+   /* justify-content: flex-end;          Align items on the right side */
+   /* justify-content: flex-start;        Default i.e. align items on the left side */
+
+   align-items: center;                /* Controls how items are positioned along the cross axis */
+   /* If one item is larger than the others, the align-items center value will align/center all other items relative to the larger item in the vertical direction i.e. the cross axis */
+   /* align-items: flex-start;            Align items at the top of the cross axis */
+   /* align-items: flex-end;              Align items at the bottom of the cross axis */
+   /* align-items: stretch;               Default i.e. items match the height of the highest flex item */
+   /* align-items: baseline;              Align all item text along the largest/common text */
+
+   /* It is important to understand where the main axis and cross axis are in order to use the justify and align properties correctly. If we use the flex-direction: row, then the main axis is horizontal and the cross axis is vertical. If we use the flex-direction: column, then the main axis is vertical and the cross axis is horizontal. This will impact on the justify-content and align-items properties behaviours. */
+}
+
+.item {
+   background-color: #f1425d;
+   padding: 30px;
+   margin: 30px;                          /* Defines the gutter/spacing between each item */
+   color: #fff;
+   font-size: 40px;
+}
+
+.i2 {
+   /* Demonstrate align-items */
+   height: 200px;
+}
+
+.i4 {
+   /* Demonstrate align-items: baseline */
+   /* font-size: 70px; */
+}
