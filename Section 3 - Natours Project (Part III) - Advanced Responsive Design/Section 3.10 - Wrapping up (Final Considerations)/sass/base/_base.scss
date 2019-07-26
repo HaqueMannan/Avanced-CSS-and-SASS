@@ -1,0 +1,39 @@
+*,
+*::after,
+*::before {
+   margin: 0;
+   padding: 0;
+   box-sizing: inherit;          /* good practice - using inheritance */
+}
+
+html {
+   /* font-size: 10px; */        /* bad practice, overrides users ability to increase font size */
+   font-size: 62.5%;             /* best practice, .625x16=10px conversion */
+
+   @include respond(tab-land) { // width < 900px?
+      font-size: 56.25%;        // 1rem = 9px, 9/16= 0.5625
+   }
+
+   @include respond(tab-port) { // width < 600px?
+      font-size: 50%;           // 1rem = 8px, 8/16= 0.5
+   }
+
+   @include respond(lg-desktop) { // width > 1800px?
+      font-size: 75%;             // 1rem = 12px, 12/16= 0.75
+   }
+}
+
+body {
+   box-sizing: border-box;       /* using inheritance */
+   padding: 3rem;                /* Padding around the whole web page*/
+
+   @include respond(tab-port) {
+      padding: 0;
+   }
+}
+
+// Custom highlighted selected text
+::selection {
+   background-color: $colour-primary;
+   color: $colour-white;
+}
