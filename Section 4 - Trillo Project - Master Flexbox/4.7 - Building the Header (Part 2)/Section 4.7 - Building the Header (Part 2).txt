@@ -1,0 +1,51 @@
+Section 4.7 - Building the Header (Part 2):
+
+--------------------------------------
+Learning Outcome
+--------------------------------------
+> Why to use SVG icons vs font icons
+> How to find, generate and use SVG sprites in HTML
+> How to change the colour of an SVG icon in CSS
+> How to use more advanced flexbox alignment techniques including justify-content, align-items, align-self and flex properties
+
+
+--------------------------------------
+SVG Icons vs Font Icons
+--------------------------------------
+- There are sevaral problems with icon fonts such as it is really a hack to display an icons which are images using as fonts, icon fonts fail more often, issues for screen-reader failing to read out icon fonts which would help the visually impaired, easy to format, etc.
+- Best practice is to move away from icon fonts and use a better alternative which is SVG.
+- Scalable Vector Graphics (SVG) is a way of writing vector graphics using code.
+
+
+--------------------------------------
+Generate SVG in HTML
+--------------------------------------
+- A great website we can use for SVG icons is:
+   https://icomoon.io/
+- Clicking on IcoMoon App will display all the SVG icons that we can use for free in our projects.
+- When we download our selected SVG from the app, we will notice a symbol-defs.svg file which is really important as it contains all the SVG's images within a single file. This is the file we would use as we would use a single global file and we can select each of the icon required. Therefore, this will optimise our web page as we only require a single HTTP request for this single file instead of requesting multiple different files.
+- To include a SVG in our HTML we would use the <svg> element tag and within this element we require the <use> tag and using the attribute xlink:href in order to include the SVG file.
+   <svg class="search__icon">
+      <use xlink:href="img/sprite.svg#icon-magnifying-glass"></use>
+   </svg>
+
+- We use the # followed by the icon name in order to select the desired SVG icon from the symbol-defs.svg (which we can rename e.g. sprite.svg).
+- The xlink:href svg will only work on a web server i.e. we would only be able to view the svg via a web server i.e. currently we can view it through live server on localhost
+
+
+--------------------------------------
+Format SVG Icons
+--------------------------------------
+- To format a SVG icons is really easy. We would set the height and width to change its size.
+- To change the SVG icon colour in css we would use the fill property and pass in a colour to fill the SVG icon. This will ultimately change the colour of our SVG icon.
+
+
+--------------------------------------
+Advanced Alignment Techniques
+--------------------------------------
+- We always make the parent element of the flex-items we want to align as the flex container.
+- The justify content allows us to align all of our flex-items on the main axis. 
+- The space-between value will spread the contents equally adding equal gutter spacing between each item. - The space-around will add spacing to the left and right hand side equally and then spaces inbetween each item.
+- The align-items property allows us to align all our flex-items across the cross axis.
+- When we want to center something or to align something, we can always use flexbox as it is perfect for all these small situations where we need to align or center some elements.
+- A flex item can become a flex-container and that is totally possible in flexbox i.e. we can have nested flexbox containers.
