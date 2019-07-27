@@ -1,0 +1,56 @@
+Section 4.5 - Building the Overall Layout:
+
+--------------------------------------
+Learning Outcome
+--------------------------------------
+> How to think about the overall layout of an app
+> Use flexbox in a real-world project for the fist time
+
+
+--------------------------------------
+Think Overall Layout
+--------------------------------------
+- We should have a mockup of our website/web-app to work off of. Looking at the mockup design we can think about HTML elements such as:
+   // A single <div> container holding all other elements which is centrally positioned.
+   // Within the container we have a header part that contains the logo, search bar and user navigation.
+   // We have the sidebar on the left which has navigation and small legal text.
+   // We have the hotel overview on the right which is a huge block containing all of the content/info.
+
+- Having an idea of all the various components that make up the web page will make it easier for us to write our HTML markup before we start to style with css.
+
+   <body>
+      <div class="container">
+         <header class="header">
+            Header Part
+         </header>
+         <div class="content">
+            <nav class="sidebar">
+               Navigation
+            </nav>
+            <main class="hotel-view">
+               Hotel View
+            </main>
+         </div>
+      </div>
+   </body>
+
+- It is very important to be semantically correct and using the correct HTML elements when writing the markup for our web pages. This provides the skeleton structure for our HTML.
+
+
+--------------------------------------
+Using Flexbox
+--------------------------------------
+- In order to start flexbox, we need to set the display property of the container to flex.
+   .content {
+      display: flex;
+   }
+
+- All child elements within the .content <div> container will become flex-items that we can manipulate using flexbox properties.
+- The Navigation and Hotel-View are child elements to content and therefore are now flex-items which will sit side-by-side each other which is what we want.
+- We use the flex shorthand property to define the flex-grow, flex-shrink and flex-basis propery values of our flex-items:
+   flex: 0 0 18%;
+   flex: 1;
+
+- If we only want to change the flex-growth, we would use the flex shorthand property and can pass in the first property value and omit the other two values. This will continue to work.
+- The flex: 1; allows the flex-item to occupy all the remaining space available to it (in the above this would be 82% (100% - 18% = 82%)).
+- This is the power of flexbox which requires no floats and clear fixes or other hacks.

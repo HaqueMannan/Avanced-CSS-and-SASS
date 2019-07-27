@@ -1,0 +1,31 @@
+.container {
+   // max-width: 120rem;         // Occupy 100% of the viewport width if max-width is less than 1200px.
+   max-width: 100rem;         // Using 100rem as developing on a smaller late 2009 13" Macbook.
+   margin: 8rem auto;         // Center the container within parent.
+   background-color: var(--colour-grey-light-1);
+   box-shadow: var(--shadow-dark);
+
+   min-height: 50rem;         // Used for testing purposes as no content within container.
+}
+
+.header {
+   height: 7rem;
+   background-color: #fff;
+   border-bottom: var(--colour-grey-light-2);
+}
+
+.content {
+   display: flex;
+}
+
+.sidebar {
+   background-color: var(--colour-grey-dark-1);
+
+   flex: 0 0 18%;
+}
+
+.hotel-view {
+   background-color: #fff;
+
+   flex: 1;
+}
