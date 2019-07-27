@@ -1,0 +1,23 @@
+Section 4.9 - Building the Navigation (Part 1):
+
+--------------------------------------
+Learning Outcome
+--------------------------------------
+> How to use scaleY and multiple transition properties with different settings to create a creative hover effect
+> How and why to use the currentColor css variable
+> How to use some more advanced flexbox alignment techniques including flex-direction, justify-content and align items
+
+
+--------------------------------------
+Advanced Flexbox Alignment Techniques
+--------------------------------------
+- We can use the flex-direction to change the direction of the main axis from horizontal (row by default) to vertical (column).
+- If we change the flex-direction to column, the justify-content will now apply on the main axis which is now vertical. The align-item will apply horizontally on the cross axis.
+- Changing the flex-direction to column will flip both the main and cross axis from the default.
+
+Flex-Direction:
+row (default)                             column
+   ---------------> Main Axis             ---------------> Cross Axis
+   |                                      |
+   |                                      |
+   V Cross Axis                           V Main Axis
