@@ -1,0 +1,22 @@
+Section 4.4 - Defining Project Settings and Custom Properties:
+
+--------------------------------------
+Learning Outcome
+--------------------------------------
+> How and why to use CSS custom properties
+
+
+--------------------------------------
+CSS Custom Properties
+--------------------------------------
+- CSS custom properties are better known as CSS variables.
+- We can now use variables within CSS and would no longer require or rely on SASS variables.
+- The advantages of CSS variables is that we no longer require a pre-processor and we can manipulate CSS variables in JavaScript and we can edit them in our devtools.
+- CSS variables cascade and are inherited.
+- CSS variables must be declared in a declaration block. We normally place this in the :root pseudo class because we want all elements to have access to these variables. The :root pseudo class is like the global parent element and therefore all child elements will have access to these variables.
+- To create a custom CSS properties we use the double dash followed by the custom property name:
+   --colour-primary: #eb2f64;
+
+- This is very similar to normal css properties, but we distinguish our custom properties using the double dashes.
+- To use the custom css properties/variables, we call on the var() function passing in the name of our custom properties:
+   background-image: linear-gradient(to right bottom, var(--colour-primary-light), var(--colour-primary-dark));
