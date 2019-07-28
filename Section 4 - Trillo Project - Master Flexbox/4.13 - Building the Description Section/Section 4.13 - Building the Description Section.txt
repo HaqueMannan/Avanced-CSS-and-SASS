@@ -1,0 +1,52 @@
+Section 4.13 - Building the Description Section:
+
+--------------------------------------
+Learning Outcome
+--------------------------------------
+> Continue to use flexbox including flex-wrap to build a multi-column list
+> How and why to use CSS masks with mask-image and mask-size
+
+
+--------------------------------------
+Multi Column List with Flex-Wrap
+--------------------------------------
+- Flexbox allows us to place flex-items side by side. Therefore, if we had an unordered list <li> elements that we wanted to have sitting side by side, we simply display the parent as a flex. However, this will cram all the elements besides one another. There is usually not enough space and it will look very terrible.
+- We can use the flex-wrap: wrap properties to allows these elements to new lines. This is still not perfect, however, the element will now sit side-by-side but within different rows (inblock-lines).
+- To fix this we can give all the elements a fix-width using the flex property, example below:
+   .list {
+      list-style: none;
+      margin: 3rem 0;
+      padding: 3rem 0;
+      border-top: var(--line);
+      border-bottom: var(--line);
+
+      display: flex;
+      flex-wrap: wrap;
+
+      &__item {
+         flex: 0 0 50%;
+      }
+   }
+
+- We use 50% as the basis because we want to have two elements (flex-items) side-by-side i.e. 100% width / 2 = 50% width.
+- This will create a multi-list column effect with our list items using the flex-wrap property.
+
+
+--------------------------------------
+Mask-Image and Mask-Size
+--------------------------------------
+- Adding SVG sprites in CSS is very difficult; however, adding a single SVG is much easier within CSS.
+- To add a SVG image in CSS we would use the background-image property as we would do with any other image types (note: we cannot select a single SVG from a sprite file).
+- The issue with using SVG as a css background-image property is that we are unable to change its colour. If this is not a problem we can continue to use this method. This is also a method used for older browsers.
+- The alternative approach is to use image masks which will allow us to colour the SVG image.
+- The mask-image property is a property that only works on more modern browsers.
+- A mask defines an area where we can look through the element and see what is behind the element.
+- We will set the background-color to a solid colour for the element and then use the SVG image icon as the mask.
+   background-color: var(--colour-primary);
+   -webkit-mask-image: url(../img/chevron-thin-right.svg);
+   -webkit-mask-size: cover;
+
+- The pink is the colour we wish to have. We use the SVG icon image as a mask to look through it and therefore the icon will be pink and the areas that we cannot look through will be covered.
+- This is similar to clipping.
+- This property only works with -webkit browsers i.e. Chrome and Firefox.
+- The -webkit-mask-size property works exactly the same as the background-size property. We use cover and adjust the size of the image using the height and width property to adjust the element container size.
