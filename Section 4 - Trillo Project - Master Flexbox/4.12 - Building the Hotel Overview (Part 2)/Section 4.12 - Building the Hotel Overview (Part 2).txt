@@ -1,0 +1,76 @@
+Section 4.12 - Building the Hotel Overview (Part 2):
+
+--------------------------------------
+Learning Outcome
+--------------------------------------
+> How to create an infinite animation
+> How to use margin: auto with flexbox and why it is so powerful
+> Continue to use flexbox properties for easy positioning and alignment
+
+
+--------------------------------------
+Infinite Animation
+--------------------------------------
+- We can use the @keyframe to make a custom animation, for example:
+   @keyframes pulsate {
+      0% {
+         transform: scale(1);
+         box-shadow: none;
+      }
+
+      50% {
+         transform: scale(1.05);
+         box-shadow: 0 1rem 4rem rgba(0, 0, 0, .25);
+      }
+
+      100% {
+         transform: scale(1);
+         box-shadow: none;
+      }
+   }
+
+- We can add our animation property to the element we want it to be applied to. We specify the keyframe animation name and the duration of the animation.
+   &:focus {
+      outline: none;
+      animation: pulsate 1s infinite;
+   }
+
+- Using the infinite value on the animation will infinitely loop our animation, thus, creating an infinite animation.
+
+
+--------------------------------------
+The Power of Margin: Auto
+--------------------------------------
+- If we wanted to create a large empty space between a couple of flex-elements we could use the flex: 1 property on one of the element. This will make the single item stretch and take up all the space that is available to it. However, the problem with this is that if we add a hover effect on this element, all the empty space would also trigger the hover (whereas we would only want the hover effect when hovering over the actual item itself).
+- The margin: auto property allows us to achieve the above style but without stretching the flex-items container. For example:
+
+HTML:
+<div class="overview">
+   <h1 class="overview__heading">...</div>
+   <div class="overview__stars">...</div>
+   <div class="overview__location">...</div>
+   <div class="overview__rating">...</div>
+</div>
+
+SCSS/CSS:
+   &__stars {
+      // flex: 1;
+      background-color: orangered;
+   }
+c.f.
+      &__stars {
+      margin-right: auto;
+      background-color: orangered;
+   }
+
+- The first will stretch the overview__stars flex-item to take all the available space but would mean that the hover will apply when also hovering over the empty space rather than just the stars.
+- The second will create the same effect as the above, however, the stars flex-items will occupy only the space it requires (background-color demonstrates the space the flex-item would take). Therefore, the hover will only apply on the flex-item i.e. stars and not on the empty space as well.
+- This is the power of margin: auto property in flexbox.
+
+
+--------------------------------------
+Flexbox Positioning
+--------------------------------------
+- SVG elements behave like in-line elements and so they act similar to text elements and we can see a small white space below a SVG element. We can remove this small white space by setting the line-height and the font-size properties of the SVG to zero. However, there is a simpler method.
+- We can simply set the parent element of the SVG element(s) to a flexbox container and these SVG will now become flex-items and the small white space will be gone. This will achieve true center align of SVG elements without the weird white space at the bottom. 
+- This will also correct the spacing between other SVG elements that sit side by side for example a stars ratings whereby we use multiple single star SVG together to make a star rating.
