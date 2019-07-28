@@ -1,0 +1,38 @@
+Section 4.11 - Building the Hotel Overview (Part 1):
+
+--------------------------------------
+Learning Outcome
+--------------------------------------
+> How to create an infinite animation
+> How to use margin: auto with flexbox and why it is so powerful
+> Continue to use flexbox properties for easy positioning and alignment
+
+
+--------------------------------------
+The Power of Margin: Auto
+--------------------------------------
+- If we wanted to create a large empty space between a couple of flex-elements we could use the flex: 1 property on one of the element. This will make the single item stretch and take up all the space that is available to it. However, the problem with this is that if we add a hover effect on this element, all the empty space would also trigger the hover (whereas we would only want the hover effect when hovering over the actual item itself).
+- The margin: auto property allows us to achieve the above style but without stretching the flex-items container. For example:
+
+HTML:
+<div class="overview">
+   <h1 class="overview__heading">...</div>
+   <div class="overview__stars">...</div>
+   <div class="overview__location">...</div>
+   <div class="overview__rating">...</div>
+</div>
+
+SCSS/CSS:
+   &__stars {
+      // flex: 1;
+      background-color: orangered;
+   }
+c.f.
+      &__stars {
+      margin-right: auto;
+      background-color: orangered;
+   }
+
+- The first will stretch the overview__stars flex-item to take all the available space but would mean that the hover will apply when also hovering over the empty space rather than just the stars.
+- The second will create the same effect as the above, however, the stars flex-items will occupy only the space it requires (background-color demonstrates the space the flex-item would take). Therefore, the hover will only apply on the flex-item i.e. stars and not on the empty space as well.
+- This is the power of margin: auto property in flexbox.
