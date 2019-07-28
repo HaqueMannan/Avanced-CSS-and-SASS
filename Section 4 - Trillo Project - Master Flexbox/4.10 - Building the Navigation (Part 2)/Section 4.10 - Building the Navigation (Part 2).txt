@@ -1,0 +1,72 @@
+Section 4.10 - Building the Navigation (Part 2):
+
+--------------------------------------
+Learning Outcome
+--------------------------------------
+> How to use scaleY and multiple transition properties with different settings to create a creative hover effect
+> How and why to use the currentColor css variable
+> How to use some more advanced flexbox alignment techniques including flex-direction, justify-content and align items
+
+
+--------------------------------------
+Creative Hover Effect
+--------------------------------------
+- When we use scale, the element scales in all directions i.e. X and Y axis. If we do scaleY() the scaling will only apply to the Y axis (the same is true for scaleX() which will apply only to the X axis).
+- Below is a hover animation example using the scaleY property:
+   &__item::before {
+      content: "";
+      width: 3px;
+      background-color: var(--colour-primary);
+      transform: scaleY(0);
+      transition: transform .2s, width .4s cubic-bezier(1, 0, 0, 1) .2s;
+   }
+
+   &__item:hover::before {
+      transform: scaleY(1);
+      width: 100%;
+   }
+
+   &__link:link,
+   &__link:visited {
+      ...
+      position: relative;
+      z-index: 10;
+   }
+
+- We use the ::before pseudo element to create a before element. The ::before pseudo element always requires a content property in order to be visible.
+- The scaleY property on the ::before element is set to 0 (0%) i.e. the element is hidden.
+- The scaleY property on the :hover::before element is set to 1 (100%) i.e. the element is displayed.
+- This creates a transition animation whereby on the hover of this element, the bar will grow (scale) from the center upwards on the Y axis direction.
+- This grows from the center because the transform-origin by default is in the center. If we change this to e.g. transform-origin: bottom; then this would make the animation scale upwards from the bottom.
+- The bar is initially 3px width and will then transition to 100% width. However, in order to see this transition animation we require some form of delay. There is an ability in the transition property to add different settings for different properties.
+- We can specify and stage different elements transitions individually (rather than all) which allows us to create more advanced creative animation effects.
+- We can add delays in transitions and animations in general. The first parameter is the duration and the second parameter is the delay. Therefore, in the above the transition on the width property duration is for .4 seconds and has a delay of .2 seconds. This allows us to view both the transform and width animation with different timings rather than all at the same time which allows for a greater advanced animation.
+- We can add timing functions e.g. cubic-bezier to make the animation look and feel even more smoother.
+   https://cubic-bezier.com/#.17,.67,.83,.67
+
+- If we want text to appear in-front of another item, we need to use z-index and provide a higher number. However, the z-index property also requires the position: relative property in order for it to work, because the z-index only works if we have a specified position.
+
+
+--------------------------------------
+The currentColor
+--------------------------------------
+- The currentColor property allows us to apply the colour of the current element or the parent element.
+- This property is very useful as it allows us to write less code.
+- The currentColor is supported by many browsers.
+- This can be used on a hover event whereby we can change the parent element colour on hover and this will also apply to the child element as it will use the currentColor of the parent element (unless the current element has a colour). 
+- This will simply allow the element to inherit the colour and is a really useful feature.
+
+
+--------------------------------------
+Advanced Flexbox Alignment Techniques
+--------------------------------------
+- We can use the flex-direction to change the direction of the main axis from horizontal (row by default) to vertical (column).
+- If we change the flex-direction to column, the justify-content will now apply on the main axis which is now vertical. The align-item will apply horizontally on the cross axis.
+- Changing the flex-direction to column will flip both the main and cross axis from the default.
+
+Flex-Direction:
+row (default)                             column
+   ---------------> Main Axis             ---------------> Cross Axis
+   |                                      |
+   |                                      |
+   V Cross Axis                           V Main Axis
