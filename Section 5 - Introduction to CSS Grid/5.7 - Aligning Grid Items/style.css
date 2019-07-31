@@ -1,0 +1,50 @@
+/* /////////////////////////////////////////////
+ALIGNING GRID ITEMS
+///////////////////////////////////////////// */
+/* 
+- Aligning grid-items to grid-areas is similar to what we can do in flex-box with the align-items property. We have the exact same property in CSS Grid.
+- Just like with Flexbox, we apply these properties to the grid i.e. the container.
+- The align-items is going to align items across the column axis. This aligns the grid-items vertically in the grid-area.
+- The align-items, just like Flexbox, is set to stretch by default. The property values we have available are stretch, start, center and end.
+- Unlike Flexbox, in CSS Grid we have a justify-items property. This is going to align items across the row axis. This aligns the grid-items horizontally in the grid-area. Again we have the same property values as the align-items but now applied horizontally.
+- We also have align-self and justify-self properties that we can apply to individual grid-items selectors to override the global alignment of the grid container for a specific individual grid-item.
+*/
+
+.container {
+   background-color: #ddd;
+   width: 1000px;
+   margin: 30px auto;
+
+   display: grid;
+   grid-template-rows: repeat(2, 150px);
+   grid-template-columns: repeat(2, 1fr);
+   grid-gap: 30px;
+
+   grid-auto-flow: row;
+   grid-auto-rows: 75px;
+
+   align-items: center;                   /* stretch (default) | start | center | end */
+   justify-items: Start;                  /* stretch (default) | start | center | end */
+}
+
+.item {
+   padding: 10px;
+   font-size: 30px;
+   font-family: sans-serif;
+   background-color: orangered;
+   color: white;
+}
+
+.item--4 {
+   background-color: crimson;
+
+   grid-row: 2 / span 3;
+   align-self: start;                     /* stretch (default) | start | center | end */
+   justify-self: end;                     /* stretch (default) | start | center | end */
+}
+
+.item--7 {
+   background-color: palevioletred;
+
+   grid-column: 1 / -1;
+}
