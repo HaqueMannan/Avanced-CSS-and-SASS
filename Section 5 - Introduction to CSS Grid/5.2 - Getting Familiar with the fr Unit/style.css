@@ -1,0 +1,80 @@
+.container {
+   background-color: #eee;
+   width: 1000px;
+   margin: 30px auto;
+   /* height: 600px; */
+
+   /* Create a 2 Rows, 3 Columns CSS Grid */
+   display: grid;                                  /* Create a css grid container. */
+   grid-template-rows: repeat(2, 150px);           /* Define the number of rows and their height. */
+   /* grid-template-rows: repeat(2, 1fr);             Occupy the available space in fractional units. */
+   /* grid-template-columns: repeat(3, 150px); */  /*  Define the number of columns and their width. */
+   /* grid-template-columns: repeat(2, 150px) 300px; */
+   /* grid-template-columns: repeat(2, 150px) 1frz; */
+   grid-template-columns: repeat(3, 1fr);          /* Occupy the available space in fractional units. *?
+   /* grid-template-columns: 1fr 2fr 1fr; */
+   /* grid-template-columns: 1fr 3fr 1fr; */
+   /* grid-template-columns: 1fr 3fr 3fr; */
+   /* grid-template-columns: 50% 1fr 1fr; */
+
+   /* 
+      - In CSS Grid we have a concept of creating tracks for our rows and columns. So in the above we have a 2 row track and a 3 column track.
+
+      - CSS Grid provides us with a new repeat() function which allows us to shorten our code when setting up our rows and columns. 
+         // grid-template-rows: repeat(2, 150px);
+         // grid-template-columns: repeat(3, 150px);
+
+      - If we wanted one of our columns to be 300px, we would write the code like so:
+         // grid-template-columns: repeat(2, 150px) 300px; 
+   */
+
+   /* 
+      CSS Grid introduces a new fr (fractional) unit. This allows us to write our code so that the the grid-item will expand to all the that it can occupy (similar to flexbox). In the below example the last grid-item will occupy all of the remaining space.
+         // grid-template-columns: repeat(2, 150px) 1fr;
+
+      - If we want 3 column tracks but all grid-items occupying the available space, we would write the code like so:
+         // grid-template-columns: repeat(3, 1fr);
+
+      - We can take this even further and distribute the space between the grid-items with different values. The available space is divided by the number of fractions and then each fraction is assigned to the grid-item - for example we can divide the available space by 4 and assign the first and last grid-item 1:4 of the space and the middle grid-item 2:4 of the available space:
+         // grid-template-columns: 1fr 2fr 1fr;
+
+      - We can use all types of units and mix them together when defining the row or column tracks and percentages is no exception. 
+      - The percentage value does not take into account the gutter/gap i.e. the 50% will take up half of the available width and the remaining space for the other grid-items will be calculate and distributed taking into account of the the gutter/gap.
+         grid-template-columns: 50% 1fr 3fr;
+      
+      - The fr unit calculation also works on the overall height of the wrapper container.
+   */
+
+   /* CSS Grid Gutters */
+   grid-row-gap: 30px;                          /* Add grid gutters to the rows. */
+   grid-column-gap: 50px;                       /* Add grid gutters to the columns. */
+   grid-gap: 30px;                              /* Add grid gutter to both rows and columns. */
+}
+
+
+/* Global Styling for Grid Items */
+.item {
+   padding: 20px;
+   font-size: 30px;
+   font-family: sans-serif;
+   color: white;
+}
+
+.item--1 {
+   background-color: orangered;
+}
+.item--2 {
+   background-color: yellowgreen;
+}
+.item--3 {
+   background-color: blueviolet;
+}
+.item--4 {
+   background-color: palevioletred;
+}
+.item--5 {
+   background-color: royalblue;
+}
+.item--6 {
+   background-color: goldenrod;
+}
