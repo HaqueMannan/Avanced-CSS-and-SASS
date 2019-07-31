@@ -1,0 +1,54 @@
+/* /////////////////////////////////////////////
+IMPLICIT GRID VS EXPLICIT GRID
+///////////////////////////////////////////// */
+/* 
+- We defined a 2x2 grid which has only 4 cells (grid areas). 
+- We have 8 grid-items in total. Therefore, the first 4 grid-items occupies the grid space we explicitly defined. CSS grid automatically adds some more tracks to the grid so that it can fit the other 4 remaining grid-items. The automatic tracks/grids are known as the implicit grid.
+- If we want to style the implicit grid, we can use the grid-auto-rows and grid-auto-columns properties to style the height of these automatic implicit grids.
+- The grid-auto-flow property by default is set to rows. This means that all implicit tracks are added to the row i.e. vertically. If we changed this property to columns, then all implicit tracks will be added to the columns i.e. horizontally.
+- If the flow is set to row, the CSS Grid algorithm will try to fill all grid-items across to rows first (i.e. horizontally). If we set the flow to column, the CSS Grid algorithm will try to fill all the grid-items across the columns first (i.e. vertically).
+- If we change the grid-auto-flow to column, the grid-auto-rows property will become irrelevant.
+- The implicit grid and the ability to style these additional rows and columns are great for use cases where we do not really know how many rows or columns there will be in our grid or layout e.g. loading in data from a server etc.
+*/
+
+.container {
+   background-color: #ddd;
+   width: 1000px;
+   margin: 30px auto;
+
+   display: grid;
+   grid-template-rows: repeat(2, 150px);
+   grid-template-columns: repeat(2, 1fr);
+   grid-gap: 30px;
+
+   grid-auto-rows: 75px;            /* Style the implicit rows height. */
+
+   grid-auto-flow: column;          /* Change the flow of added implicit track direction. */
+   grid-auto-columns: .5fr;         /* Style the implicit column width (.5fr = half of explicit unit). */
+}
+
+.item {
+   padding: 20px;
+   font-size: 30px;
+   font-family: sans-serif;
+   background-color: orangered;
+   color: white;
+}
+
+.item--header {
+   grid-column: 1 / -1;
+}
+
+.item--main-content {
+   grid-column: 1 / span 3;
+}
+
+.item--sidebar {
+   grid-row: 2 / span 2;
+   grid-column: 4 / 5;
+   grid-column: 4 / -1;
+}
+
+.item--footer {
+   grid-column: 1 / -1;
+}
