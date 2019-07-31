@@ -1,0 +1,64 @@
+/* /////////////////////////////////////////////
+ALIGNING TRACKS
+///////////////////////////////////////////// */
+/* 
+- Our grid container is 1000px by 1000px large. However, our grid tracks only occupy a small part of the container i.e. 200px column and 100px row. Therefore, the rest of the container is very empty.
+- We can align the tracks to the container so that the content takes up more available space.
+- We have similar properties to Flexbox and in fact they work exactly the same. 
+- We can use the justify-content property to align the tracks inside the container across the row axis i.e. horizontally.
+- We can use the align-content property to align the tracks inside the container across the column axis i.e. vertically.
+
+Conclusion (property names logic):
+- Where we have -items in the property, this will align the individual items. 
+- If we have -content in the property, then this will align the entire tracks. 
+- The align in the property means aligning in the vertical direction (i.e. column axis). 
+- The justify in the property means aligning in the horizontal direction (i.e. row axis).
+
+- Sometimes the automatic placement algorithm adds empty cells to maintain the sequence of the HTML items in the source code. We may not want these empty hold cells.
+- To fix this, we can add the dense value to the grid-auto-flow property. This will create a dense grid whereby we do not want any empty cells in our grid (i.e. all items packed together and all grid-cells are filled with some kind of item).
+*/
+
+.container {
+   background-color: #ddd;
+   width: 1000px;
+   height: 1000px;
+   margin: 30px auto;
+
+   display: grid;
+   grid-template-rows: repeat(2, 100px);
+   grid-template-columns: repeat(2, 200px);
+   grid-gap: 30px;
+
+   grid-auto-flow: row dense;       /* Fixes empty cells i.e. creates a dense grid. */
+   grid-auto-rows: 75px;
+
+   justify-content: center;         /* start (default) | center | end | space-between | space-around|                                        space-evenly */
+   align-content: center;           /* start (default) | center | end | space-between | space-around |                                      space-evenly */
+}
+
+.item {
+   padding: 10px;
+   font-size: 30px;
+   font-family: sans-serif;
+   background-color: orangered;
+   color: white;
+}
+
+.item--4 {
+   background-color: crimson;
+
+   grid-row: 2 / span 3;
+}
+
+.item--6 {
+   /* Demo of algorithm creating empty cell (grid-area) to maintain HTML item sequence. */
+   background-color: lightcoral;
+
+   grid-row: 2 / span 2;
+}
+
+.item--7 {
+   background-color: palevioletred;
+
+   grid-column: 1 / -1;
+}
