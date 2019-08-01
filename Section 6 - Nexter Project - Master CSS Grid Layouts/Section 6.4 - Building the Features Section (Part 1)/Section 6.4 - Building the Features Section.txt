@@ -1,0 +1,27 @@
+Section 6.4 - Building the Features Section:
+
+--------------------------------------
+Learning Outcome
+--------------------------------------
+> How and why to create grid inside of grids
+> How to create a responsive component without media queries
+> How to build a small component using CSS Grid
+
+
+--------------------------------------
+Grid Inside of Grid
+--------------------------------------
+- To nest grid inside of each other, it is the same as in flexbox, whereby a grid-item can become a grid-container. All we simply have to do is set the display: grid; on the item itself:
+   .container {
+      display: grid;
+   }
+
+   .grid-item {
+      ...
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+
+      // grid-template-rows: auto auto;   (This is not needed because it will automatically create a implicit row. The Auto are default values).
+   }
+
+- CSS Grid Level 2 specification will bring with it sub-grid. This will allow for nesting grid i.e. the sub-grid will snap it's tracks to the parent grid. For example, it will allow the sub-grid to snap its columns to the parent grid. This will allow the small sub-grid columns to be where the overall page columns are. Currently, this is not available and we must manually create new columns for the grid on the item (i.e. sub-grid) that we have created.
