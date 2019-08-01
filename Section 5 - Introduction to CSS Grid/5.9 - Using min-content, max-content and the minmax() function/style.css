@@ -1,0 +1,70 @@
+/* /////////////////////////////////////////////
+MIN-CONTENT, MAX-CONTENT & MINMAX()
+///////////////////////////////////////////// */
+/* 
+   - The min-content takes the largest column-track / row-track (i.e. minimum space) needed to fit the content without overflowing the grid-area.
+   - We can apply the min-content and max-content unit values on either the grid-template-column or grid-template-row properties.
+   - The max-content property is used as a unit to determine the width/height of the grid-area based on the grid-item within the area i.e. the grid-area will be as wide as it needs to be to accommodate/fit the content within it.
+   - The max-content also tries to ensure there are no line-breaks.
+   - The minmax() function allows us to pass two values so that the CSS ensures that the track will stay between the two values passed into the function. For example, minmax(100px, 200px) will ensure that the content will stay within 100px to 200px range width or height (whether applied to the grid-column or grid-row).
+   - We can also use the min-content and max-content units within the minmax() function as well as any other units such as px, fr, %, etc.
+   - Interesting fact: CSS Grid specification states that a fractional unit fills up the entire remaining space but it is never smaller than the minimum content of a row or column. So ideally, if we had 3 1fr grid-columns, these should be the same size unless at the limit when the content gets too wide, the fractional unit takes the minimum width that it requires to fill the grid-column without overflowing (therefore, the 3 1fr columns will not be equal sizes at the limit).
+*/
+
+.container {
+   background-color: #ddd;
+   width: 1000px;
+   margin: 30px auto;
+
+   display: grid;
+   /* The min-content and max-content units */
+   grid-template-columns: max-content 1fr 1fr min-content;
+   grid-template-rows: repeat(2, 150px);
+   grid-template-rows: repeat(2, min-content);
+
+   /* The minmax() function */
+   width: 90%;          /* using a relative width to play with the minmax on the grid-column. */
+   grid-template-rows: repeat(2, minmax(150px, min-content));
+   grid-template-columns: minmax(200px, 300px) repeat(3, 1fr);
+   grid-template-columns: minmax(200px, 50%) repeat(3, 1fr);
+   grid-template-columns: minmax(200px, 1fr) repeat(3, 1fr);
+}
+
+.item {
+   padding: 10px;
+   font-size: 30px;
+   font-family: sans-serif;
+   color: white;
+}
+
+.item--1 {
+   background-color: orangered;
+}
+
+.item--2 {
+   background-color: yellowgreen;
+}
+
+.item--3 {
+   background-color: blueviolet;
+}
+
+.item--4 {
+   background-color: palevioletred;
+}
+
+.item--5 {
+   background-color: royalblue;
+}
+
+.item--6 {
+   background-color: goldenrod;
+}
+
+.item--7 {
+   background-color: crimson;
+}
+
+.item--8 {
+   background-color: darkslategray;
+}
