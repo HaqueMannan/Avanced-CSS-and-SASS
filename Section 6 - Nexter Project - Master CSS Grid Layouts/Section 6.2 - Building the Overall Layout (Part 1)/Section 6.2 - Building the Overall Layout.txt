@@ -1,0 +1,26 @@
+Section 6.2 - Building the Overall Layout:
+
+--------------------------------------
+Learning Outcome
+--------------------------------------
+> How to build a complex and modern layout using advanced CSS Grid techniques
+> How to choose different row and column track sizes for different types of content
+
+
+--------------------------------------
+Modern Layout Using Advanced CSS Grid
+--------------------------------------
+- It is always easy to know the layout of the overall web-page before coding it. This allows us to ensure that we have the correct columns and rows for our CSS Grid properties.
+- It is important to always think about the responsiveness of the web page from the beginning when we define our grid tracks. We should be thinking about when the page increases and decreases and what we would want to occur to our sections and choose the grid accordingly.
+- The class "container" will act as the overall container for our CSS Grid.
+- We start by adding the display property to grid.
+- We would then define the grid-template-column and grid-template-rows properties to setup the grid-tracks.
+- Below is an example code of a responsive grid-track:
+   .container {
+      display: grid;
+      grid-template-rows: 80vh min-content 40vw repeat(3, min-content);
+   }
+
+- In real life projects we are not only using pixel units but instead we are using real units that make sense for the content that we are adding into our grid. Therefore, units such as viewport height and width (vh, vw) are really important units to use in real world scenarios.
+- We do not always use fixed positions for the height and width as we want our rows and columns to adapt to the content (especially in the rows).
+- As a result we do not need to think about media-queries if we think responsiveness from the beginning as the CSS Grid allows for responsive designs.
