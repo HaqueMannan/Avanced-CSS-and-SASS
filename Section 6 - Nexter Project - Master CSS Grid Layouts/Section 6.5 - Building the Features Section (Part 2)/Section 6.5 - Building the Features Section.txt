@@ -1,0 +1,53 @@
+Section 6.5 - Building the Features Section:
+
+--------------------------------------
+Learning Outcome
+--------------------------------------
+> How and why to create grid inside of grids
+> How to create a responsive component without media queries
+> How to build a small component using CSS Grid
+
+
+--------------------------------------
+Grid Inside of Grid
+--------------------------------------
+- To nest grid inside of each other, it is the same as in flexbox, whereby a grid-item can become a grid-container. All we simply have to do is set the display: grid; on the item itself:
+   .container {
+      display: grid;
+   }
+
+   .grid-item {
+      ...
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+
+      // grid-template-rows: auto auto;   (This is not needed because it will automatically create a implicit row. The Auto are default values).
+   }
+
+- CSS Grid Level 2 specification will bring with it sub-grid. This will allow for nesting grid i.e. the sub-grid will snap it's tracks to the parent grid. For example, it will allow the sub-grid to snap its columns to the parent grid. This will allow the small sub-grid columns to be where the overall page columns are. Currently, this is not available and we must manually create new columns for the grid on the item (i.e. sub-grid) that we have created.
+
+
+--------------------------------------
+Responsive Components without Media Queries
+--------------------------------------
+- In many scenarios we would want the content to define the rows and therefore it will become apparent in real world projects we only define the grid-template-columns and do not define the rows.
+- We can make our content responsive without writing any media queries by using only the grid-template-columns property and the auto-fit value.
+   .feature {
+      ...
+      grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+   }
+
+- The auto-fit value creates as many tracks as it can fit based on the width that we define. 
+- We use the minmax() function to define the width that the auto-fit would use to determine the number of tracks it can create.
+- This code makes our web page truly dynamic and the number of tracks change based on the viewport size without the need of any media queries.
+- We can now use media queries for truly on styling such as font-sizes at different screen sizes, etc.
+
+
+--------------------------------------
+Building Small Components
+--------------------------------------
+- We can have a grid inside of a grid inside of a grid (similar to how we can do it in flexbox). We can really nest the grids deep.
+- The -1 value trick for spanning only works on explicit grids and therefore will not work with implicit grids.
+- The align-items allows us to control the alignments of items within the grid cells. By default this will be set to stretch. Where we have different text of different lengths, we can use the align items to align them to the top (i.e. start), overriding the global stretch property for all grid-items. This is useful for items that have different amount of text content effecting the height of the container.
+- We can build small components within a larger components using the nesting grid technique and using alignments to align our items to achieve building even smaller component layouts.
+- We can make small components in CSS Grid as long as they are two dimentional.
