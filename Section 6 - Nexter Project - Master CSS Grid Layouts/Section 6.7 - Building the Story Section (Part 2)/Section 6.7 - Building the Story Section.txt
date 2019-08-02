@@ -1,0 +1,47 @@
+Section 6.7 - Building the Story Section:
+
+--------------------------------------
+Learning Outcome
+--------------------------------------
+> How to deal with overlapping grid items
+> Why images are special and behave differently than other grid items
+> How to decide if Flexbox is a better tool in certain situations
+
+
+--------------------------------------
+Overlapping Grid Items
+--------------------------------------
+- To overlap grid-items we would use both the grid-row and grid-column properties to align the items on the grid. We can use this to overlap items.
+- To overlap an item outside its grid container, this can be acheived via 2 methods:
+   1) Use the transform: scale() property to scale the image up. However, it is important to note with this method that the image will not start in the middle unless we define the transform-origin.
+   2) We can change the width of the image.
+- Once we increase the image we need to set its z-index to a higher number so that it appears in front of other items.
+- The z-index property can be used to order which items are positioned in-front and which items are positioned behind items.
+
+
+--------------------------------------
+CSS Grid and Images
+--------------------------------------
+- We should always specify the image width in percentages so that they are always flexible e.g.:
+   .img {
+      width: 100%
+   }
+
+- The image will occupy the entire container i.e. 100% of the container.
+- We can create a nested CSS grid and the image will then occupy a single grid cell rather than the entire parent grid container.
+- We can use the CSS Grid cells to position and change the size of the image dynamically.
+- Regular grid-items such as a <div> will fill out the entire grid-area, however, images do not occupy the whole grid-area as they are different. This is because they have an intrinsic aspect ratio associated with them (i.e. it has some form of dimentions and therefore an aspect ratio). The image always tries to keep that aspect ratio even if we tell it to fill the entire grid area.
+- To truly align the image in the center we can use the align property to center.
+- The align and justify properties are really important to know for situations such as this when aligning grid-items on the grid.
+
+
+--------------------------------------
+When to Use Flexbox
+--------------------------------------
+- We should decide to use flexbox when we have a one-dimensional layout i.e. one item after another going down and there are no content to the side (and vice versa).
+- In many modern web design, CSS Grid is used together with flexbox.
+- Therefore, we can mix the two tools/technology together to achieve our desired results.
+- The display: flex property on the parent container will make the items sit side by side horizontally. If we want the flex-items to be one below another, we simply change the flex-direction to column.
+- We can use flexbox to now center the items using the align/justify-content properties depending on whether aligning on the main axis or the cross axis.
+- This will help the grid-items to stay vertically-centered when changing the size of the viewport.
+- Note: we can use CSS Grid for one dimensional layouts as well and ignore flexbox, however, flexbox is used for one-dimensional layouts while CSS Grid is mainly used for two-dimensional layouts.
