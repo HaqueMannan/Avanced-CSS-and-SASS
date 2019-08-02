@@ -1,0 +1,66 @@
+Section 6.10 - Building the Gallery Section:
+
+--------------------------------------
+Learning Outcome
+--------------------------------------
+> How to create a complex grid-looking gallery
+> Using object-fit together with images for grid items
+
+
+--------------------------------------
+Grid Gallery
+--------------------------------------
+- A grid-gallery is a perfect use case for using CSS Grid. This scenario is very visible of how images/items are aligned to the underlying CSS Grid.
+- To achieve this look, it would have been extremely difficult without the use of CSS Grid. This demonstrates how powerful CSS Grids are.
+- The most important thing to consider is the the smallest unit that we would want to have in our grid i.e. the smallest image we would want in our grid.
+- the columns and rows we have, the more complex/variety we can create the items that will occupy our grid to make the grid gallery.
+   .gallery {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      grid-template-rows: repeat(7, 5vw);
+   }
+
+- We use the vw unit to maintain the aspect ratio of the images regardless of the width of the viewport. This requires experimentation to setup the correct underlying grid and the aspect ratio maintained by the viewport-width unit.
+- An alternative method is to pre-set the height of the gallery container row and then use the fr unit instead of vw. This would have then divided equally the height of the container by the number of rows.
+
+
+--------------------------------------
+Object Fit
+--------------------------------------
+- When creating a grid gallery, due to each image having a different aspect ratio this causes the image to either be smaller than the grid-cell or overflow the grid-cell. 
+- To fix this issue and make all the images look unified and have the same aspect ratio, we can use the property called object-fit. This is similar to setting the background-size to cover for a background image.
+- We create a parent container for each of the image elements and then add the element inside of that container and then assign the object-fit property to the parent element so that the image covers the parent container without overflowing.
+HTML:
+   <section class="gallery">
+      <figure class="gallery__item gallery__item--1">
+         <img src="img/gal-1.jpeg" alt="Gallery Image 1" class="gallery__img">
+      </figure>
+      <figure class="gallery__item gallery__item--2">
+         <img src="img/gal-2.jpeg" alt="Gallery Image 2" class="gallery__img">
+      </figure>
+      <figure class="gallery__item gallery__item--3">
+         <img src="img/gal-3.jpeg" alt="Gallery Image 3" class="gallery__img">
+      </figure>
+   </section>
+
+CSS:
+   .gallery {
+      ...
+      &__img {
+         height: 100%;
+         width: 100%;
+         object-fit: cover;
+      }
+
+      &__item {
+         &--1 {
+            grid-row: 1 / span 2;
+            grid-column: 1 / span 2;
+         }
+      }
+   }
+
+- The object-fit property only works if we set the width and the height of the parent element.
+- The image is now only the height of the parent element i.e. the figure element itself. This allows us to align the figure element within the grid-cell and use the object-fit property on the image to cover the parent figure element.
+- This will provide the consistency of aspect ratio for all items added to our image gallery.
+- We can then position the item on the grid using the grid-row and grid-column properties.
