@@ -1,0 +1,54 @@
+Section 6.19 - Browser Support for CSS Grid:
+
+--------------------------------------
+Learning Outcome
+--------------------------------------
+> Browser support for the CSS Grid.
+> Progressive enhancement
+
+
+--------------------------------------
+Browser Support for CSS Grid
+--------------------------------------
+- Most modern browsers now support CSS Grid. We can also use https://caniuse.com/ to see which features are supported by browsers and their versions.
+- The problems are always the older browsers (usually Internet Explorer and Edge).
+- The question is always whether we can use CSS Grid only for our websites. The answer should be yes but again depends on the target audience (i.e. are they high tech users? are they using the most latest browser version? etc).
+- If the audience are using older browsers then it may not be safe to use CSS Grid in production, at least not without a fall-back. 
+
+
+--------------------------------------
+Progressive Enhancement
+--------------------------------------
+- Progressive enhancement is where we build a page with the older CSS methods, pretending that the new features such as Flexbox and Grid does not even exist. On top of all that we would build our CSS Grid if the browser supports it.
+- This approach would mean that we would have duplicate work and we still have to mess around with all the old code. If we decide to use the old method to write all our CSS code, then we might as well leave it like that without using any CSS Grid at all (as this would be a duplication of work).
+- However, we could theoretically use progressive enhancement on our whole website. Below is an example code snippet:
+
+   .features {
+      @supports(display: grid) {
+         display: grid;
+         // grid-template-columns: repeat(3, 1fr);
+         grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+         grid-gap: 6rem;
+         align-items: start;
+      }
+      ...
+   }
+
+   .feature {
+      float: left;
+      width: 33.3333%;
+      margin-bottom: 2rem;
+
+      @supports(display: grid) {
+         width: auto;
+         margin-bottom: 0;
+      }
+      ...
+   }
+
+- We would need to use floats on each of the feature and give it some width and padding using the old method.
+- To add the CSS Grid feature on top of this, we would use the @supports() attribute to check/test if CSS Grid is supported by a browser and then apply the styling to execute if this is true.
+- If the browser does supports CSS Grid, we would also need to add more css codes to remove any old method styling so that only the new feature styles will apply.
+- Certain styles are actually ignored by grid-containers and grid-items (the same applies to flex-containers and flex-items) such as floats, display: inline-block, display: table-cell and vertical align. Therefore, we do not need to override all old method css styles as these would be ignored altogether.
+- If we now have a browser that does not support grid, it would then simply display the website using the old method as we had it before and only newer browsers that supports CSS Grid will use the styles within the @support().
+- We can build the entire web page like the above using the older methods as a fall back. However, this would mean that we would have a lot of duplicate code and the website will look slightly different on different browsers. The main disadvantage of progressive enhancements is the duplication of work and the more time and effort it takes to code it all up.
