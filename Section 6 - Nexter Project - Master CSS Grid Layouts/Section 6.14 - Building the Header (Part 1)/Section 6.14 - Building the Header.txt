@@ -1,0 +1,24 @@
+Section 6.14 - Building the Header:
+
+--------------------------------------
+Learning Outcome
+--------------------------------------
+> How to manage vertical spacing in responsive layout using CSS Grid techniques
+> How to use ::before and ::after as grid items
+
+
+--------------------------------------
+Managing Vertical Spacing
+--------------------------------------
+- To manage the vertical spacing for responsive layouts we can use CSS Grid.
+- We can use the fractional (fr) unit when defining the grid-template-rows to automatically align the grid-items on the rows:
+   grid-template-rows: 1fr;
+
+- The above will allow the first item to occupy all the space it requires while the other grid-items will automatically occupy the remaining space.
+- We can use the grid-row-gap property to provide gutter spacing between each column and row tracks. This helps to provide spacing.
+- We cannot style each gaps individually in CSS Grid, however, we can increase the row size as an alternative method. Therefore, combining both the grid-template-row and grid-row-gap properties allows us to manage the vertical spacing of our CSS grid to provide a responsive layout, for example:
+   grid-template-rows: 1fr min-content 6rem;
+   grid-row-gap: 1.5rem;
+
+- The first row item will take 1fr of space while the second row item will take the minimum space it requires of the remaining space and the third item will take 60px (6rem) of vertical spacing. We can add more row units to the grid-template-rows to space each row height of each item providing the necessary vertical spacing required for our element.
+- We can use the align-self / justify-self properties to override the default behaviour of items stretching the whole grid-area.
